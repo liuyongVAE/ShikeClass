@@ -14,6 +14,7 @@ class IndexTableViewCell: UITableViewCell {
     let time = UILabel()
     let location = UILabel()
     let fileButton = UIButton()
+    let fileLabel = UILabel()
     let SignButton = UIButton()
     
 
@@ -81,7 +82,7 @@ class IndexTableViewCell: UITableViewCell {
         let lineb = UIView()
         lineb.frame = CGRect(x:0,y:getHeight(262),width:SCREEN_WIDTH,height:getHeight(1))
         lineb.backgroundColor = lineColor
-        self.addSubview(lineb)
+        //self.addSubview(lineb)
         
         SignButton.frame = CGRect(x:SCREEN_WIDTH -  getWidth(123),y:0,width:getWidth(123),height:getHeight(170))
         SignButton.backgroundColor = naviColor
@@ -89,9 +90,35 @@ class IndexTableViewCell: UITableViewCell {
         SignButton.titleLabel?.numberOfLines = 0
         self.addSubview(SignButton)
         
+        fileButton.frame = CGRect(x:0,y:getHeight(171),width:SCREEN_WIDTH,height:getHeight(70))
+        //fileButton.backgroundColor = UIColor.blue
+        self.addSubview(fileButton)
         
+        fileLabel.frame = CGRect(x:getWidth(70),y:getHeight(23),width:0,height:0)
+        fileLabel.font = UIFont.systemFont(ofSize: getHeight(26))
+        fileLabel.textColor = title1Color
+        fileButton.addSubview(fileLabel)
+
+        let lineC = UIView()
+        lineC.frame = CGRect(x:-1,y:getHeight(69),width:SCREEN_WIDTH + 2,height:getHeight(22))
+        lineC.backgroundColor = backColor
+        lineC.layer.borderWidth = getHeight(1)
+        lineC.layer.borderColor = lineColor.cgColor
+        fileButton.addSubview(lineC)
+        
+        
+        let FileImage = UIImageView()
+        FileImage.frame = CGRect(x:getWidth(30),y:getHeight(19),width:getWidth(30),height:getHeight(30))
+        FileImage.image = #imageLiteral(resourceName: "bottom_icon5")
+        fileButton.addSubview(FileImage)
+        
+        let rightImage = UIImageView()
+        rightImage.frame = CGRect(x: SCREEN_WIDTH - getWidth(60),y:getHeight(19),width:getWidth(43),height:getHeight(43))
+        rightImage.image = #imageLiteral(resourceName: "bottom_icon5")
+        fileButton.addSubview(rightImage)
         
     
+        
         
         
         

@@ -61,4 +61,4 @@ let naviColor = hexStringToColor(hexString: "#d33a32")
 let title2color = hexStringToColor(hexString: "#7a7a7a")
 let backColor = hexStringToColor(hexString:"#fafafa")
 let lineColor = hexStringToColor(hexString:"#dddddd")
-
+let title1Color = hexStringToColor(hexString:"#333333")

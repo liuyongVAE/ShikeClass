@@ -80,6 +80,9 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.time.text = self.dataSource["time"]?[indexPath.row]
         cell.location.text = self.dataSource["position"]?[indexPath.row]
         cell.SignButton.setTitle("立即\n签到", for: .normal)
+        cell.fileButton.tag = indexPath.row
+        cell.fileLabel.text = (self.dataSource["name"]?[indexPath.row])! + "  课件"
+        cell.fileLabel.sizeToFit()
         cell.SignButton.tag = indexPath.row
         cell.ClassName.sizeToFit()
         cell.time.sizeToFit()
@@ -113,10 +116,18 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     // MARK: - 网络请求
     
         func request(){
-        self.dataSource["id"]?.append("1233")
-        self.dataSource["name"]?.append("高等数学A（一）")
+             self.dataSource["id"]?.append("1233")
+            self.dataSource["name"]?.append("高等数学A（一）")
             self.dataSource["time"]?.append("周一 上午8：00-9:50")
-        self.dataSource["position"]?.append("E4-102")
+            self.dataSource["position"]?.append("E4-102")
+            self.dataSource["id"]?.append("1233")
+            self.dataSource["name"]?.append("高等数学A（一）")
+            self.dataSource["time"]?.append("周一 上午8：00-9:50")
+            self.dataSource["position"]?.append("E4-102")
+            self.dataSource["id"]?.append("1233")
+            self.dataSource["name"]?.append("高等数学A（一）")
+            self.dataSource["time"]?.append("周一 上午8：00-9:50")
+            self.dataSource["position"]?.append("E4-102")
     }
     
     
