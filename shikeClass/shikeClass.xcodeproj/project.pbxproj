@@ -14,6 +14,8 @@
 		08CE12C21FA7522E00792844 /* shikeClassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12C11FA7522E00792844 /* shikeClassUITests.swift */; };
 		08CE12D21FA753E800792844 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12D11FA753E800792844 /* IndexViewController.swift */; };
 		08CE12D61FA7591800792844 /* property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12D51FA7591800792844 /* property.swift */; };
+		08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */; };
+		08CE12DD1FA86B8500792844 /* IndexTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		08CE12C31FA7522E00792844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08CE12D11FA753E800792844 /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 		08CE12D51FA7591800792844 /* property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = property.swift; sourceTree = "<group>"; };
+		08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexTableViewCell.swift; sourceTree = "<group>"; };
+		08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		08CE12A01FA7522E00792844 /* shikeClass */ = {
 			isa = PBXGroup;
 			children = (
+				08CE12AD1FA7522E00792844 /* Info.plist */,
 				08CE12A81FA7522E00792844 /* Assets.xcassets */,
 				08CE12D41FA758FA00792844 /* Other */,
 				08CE12D31FA754D500792844 /* File */,
@@ -126,7 +131,9 @@
 		08CE12D01FA7532900792844 /* Index */ = {
 			isa = PBXGroup;
 			children = (
-				08CE12D11FA753E800792844 /* IndexViewController.swift */,
+				08CE12D91FA86B4D00792844 /* Controller */,
+				08CE12D81FA86B4700792844 /* View */,
+				08CE12D71FA86B2B00792844 /* Model */,
 			);
 			path = Index;
 			sourceTree = "<group>";
@@ -141,12 +148,35 @@
 		08CE12D41FA758FA00792844 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				08CE12AD1FA7522E00792844 /* Info.plist */,
 				08CE12A11FA7522E00792844 /* AppDelegate.swift */,
 				08CE12AA1FA7522E00792844 /* LaunchScreen.storyboard */,
 				08CE12D51FA7591800792844 /* property.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		08CE12D71FA86B2B00792844 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		08CE12D81FA86B4700792844 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */,
+				08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		08CE12D91FA86B4D00792844 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				08CE12D11FA753E800792844 /* IndexViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +288,7 @@
 			files = (
 				08CE12AC1FA7522E00792844 /* LaunchScreen.storyboard in Resources */,
 				08CE12A91FA7522E00792844 /* Assets.xcassets in Resources */,
+				08CE12DD1FA86B8500792844 /* IndexTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +315,7 @@
 			files = (
 				08CE12D61FA7591800792844 /* property.swift in Sources */,
 				08CE12A21FA7522E00792844 /* AppDelegate.swift in Sources */,
+				08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */,
 				08CE12D21FA753E800792844 /* IndexViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,7 +570,7 @@
 				08CE12C51FA7522E00792844 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		08CE12C61FA7522E00792844 /* Build configuration list for PBXNativeTarget "shikeClass" */ = {
 			isa = XCConfigurationList;
@@ -547,7 +579,7 @@
 				08CE12C81FA7522E00792844 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		08CE12C91FA7522E00792844 /* Build configuration list for PBXNativeTarget "shikeClassTests" */ = {
 			isa = XCConfigurationList;
@@ -556,7 +588,7 @@
 				08CE12CB1FA7522E00792844 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		08CE12CC1FA7522E00792844 /* Build configuration list for PBXNativeTarget "shikeClassUITests" */ = {
 			isa = XCConfigurationList;
@@ -565,7 +597,7 @@
 				08CE12CE1FA7522E00792844 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
