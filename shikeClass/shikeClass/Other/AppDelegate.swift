@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let state  = UIApplication.shared.applicationState
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -22,17 +22,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = UIColor.white
         // Override point for customization after application launch.
+        
+        
+        
+        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
+        
+        print("程序挂起");
+//        let state  = UIApplication.shared.applicationState
+//        print(state.rawValue)
+//        if state == .inactive{
+//
+//        }else if state == .background{
+//            let ScreenBrightness = UIScreen.main.brightness
+//            print(ScreenBrightness)
+//            if ScreenBrightness > 0.0
+//            {
+//
+//            }else{
+//
+//                print("lock")
+//            }
+//        }
+        
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         
-        print("进入后台")
+        if self.didUserPressLockButton() {
+            //User pressed lock button
+            print("Lock screen.")
+        }
+        else {
+            print("Home.")
+            //user pressed home button
+        }
+        
+        // print("进入后台");
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -51,7 +83,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("应用杀死")
     }
     
- 
+    func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+
+        //print("锁屏")  //只有在设置密码后才能用
+    }
+    
+    func didUserPressLockButton()->Bool{
+        //
+        let oldBrightness = UIScreen.main.brightness
+        //
+        UIScreen.main.brightness =  oldBrightness + (oldBrightness <= 0.01 ? (0.01) : (-0.01))
+        let newBrightness = UIScreen.main.brightness
+        //
+        UIScreen.main.brightness = oldBrightness;
+        return oldBrightness != newBrightness;
+        
+        
+    }
+  
 
 
 }

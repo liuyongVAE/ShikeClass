@@ -27,6 +27,9 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         request()
         self.setUI()
         self.setTV()
+        
+        UIScreen.main.brightness = 1
+        print(UIScreen.main.brightness)
         // Do any additional setup after loading the view.
     }
     
