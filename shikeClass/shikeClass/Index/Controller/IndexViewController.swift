@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
 
-class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+
+class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate{
     
-    
+    fileprivate let locationManager:CLLocationManager = CLLocationManager()
     fileprivate let tableview:UITableView = UITableView()
     fileprivate var dataSource:[String:[String]] = [
         "name":[],
@@ -27,7 +29,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         request()
         self.setUI()
         self.setTV()
-        
+        getLocation()
         UIScreen.main.brightness = 1
         print(UIScreen.main.brightness)
         // Do any additional setup after loading the view.
@@ -46,9 +48,85 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.navigationItem.leftBarButtonItem = item
     }
     
+    //定位相关
+    
+    func  getLocation(){
+        showEventAcessDeniedAlert()
+        locationManager.delegate = self
+        //精度
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.distanceFilter = 100
+        
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            print("定位开始")
+            
+        }
+    }
+    //检测定位权限
+    func showEventAcessDeniedAlert(){
+        
+        if CLLocationManager.authorizationStatus() != .denied{
+            
+            print("拥有定位权限")
+        }else{
+            let alertController = UIAlertController(title:"请开启定位",message:"定位服务未开启，请进入系统设置>隐私>定位服务>打开开关，并允许App试用定位服务",preferredStyle:.alert)
+            let setting = UIAlertAction(title:"设置",style:.default){
+                (alertAction) in
+                if let appsetting = NSURL(string: UIApplicationOpenSettingsURLString){
+                    UIApplication.shared.open(appsetting as URL)
+                }
+                
+            }
+            
+            let cancel = UIAlertAction(title:"取消",style:.cancel,handler:nil)
+            alertController.addAction(setting)
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
+            
+            
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let currLocation = locations.last!
+        print(currLocation.coordinate.latitude)
+        print(currLocation.coordinate.longitude)
+    
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error")
+    }
+    
     
     //点击个人中心
-    @objc func  touchMine(){}
+    @objc func  touchMine(){
+        
+        
+    }
+    
+    
+    func setMineUI(){
+        let view = UIView()
+        view.frame = self.view.frame
+        view.backgroundColor = UIColor.blue
+        self.view.addSubview(view)
+        
+    }
+    
+    
+    
     
 
     override func didReceiveMemoryWarning() {

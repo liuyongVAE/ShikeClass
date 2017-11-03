@@ -82,7 +82,7 @@ class IndexTableViewCell: UITableViewCell {
         let lineb = UIView()
         lineb.frame = CGRect(x:0,y:getHeight(262),width:SCREEN_WIDTH,height:getHeight(1))
         lineb.backgroundColor = lineColor
-        //self.addSubview(lineb)
+        self.addSubview(lineb)
         
         SignButton.frame = CGRect(x:SCREEN_WIDTH -  getWidth(123),y:0,width:getWidth(123),height:getHeight(170))
         SignButton.backgroundColor = naviColor
@@ -102,8 +102,8 @@ class IndexTableViewCell: UITableViewCell {
         let lineC = UIView()
         lineC.frame = CGRect(x:-1,y:getHeight(69),width:SCREEN_WIDTH + 2,height:getHeight(22))
         lineC.backgroundColor = backColor
-        lineC.layer.borderWidth = getHeight(1)
-        lineC.layer.borderColor = lineColor.cgColor
+       // lineC.layer.borderWidth = getHeight(1)
+        //lineC.layer.borderColor = lineColor.cgColor
         fileButton.addSubview(lineC)
         
         

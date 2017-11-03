@@ -16,6 +16,7 @@
 		08CE12D61FA7591800792844 /* property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12D51FA7591800792844 /* property.swift */; };
 		08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */; };
 		08CE12DD1FA86B8500792844 /* IndexTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */; };
+		08CE12E01FAC3F7B00792844 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		08CE12D51FA7591800792844 /* property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = property.swift; sourceTree = "<group>"; };
 		08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexTableViewCell.swift; sourceTree = "<group>"; };
 		08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexTableViewCell.xib; sourceTree = "<group>"; };
+		08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08CE12E01FAC3F7B00792844 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +88,7 @@
 				08CE12B51FA7522E00792844 /* shikeClassTests */,
 				08CE12C01FA7522E00792844 /* shikeClassUITests */,
 				08CE129F1FA7522E00792844 /* Products */,
+				08CE12DE1FAC3F7B00792844 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +181,14 @@
 				08CE12D11FA753E800792844 /* IndexViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		08CE12DE1FAC3F7B00792844 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
