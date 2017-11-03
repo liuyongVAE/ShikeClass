@@ -4,8 +4,7 @@ use_frameworks!
 target ‘shikeClass’ do
   pod ‘Alamofire’ 
   pod ’SDWebImage’
-  pod 'WCLImagePickerController’
   pod ’SVProgressHUD’
-  pod 'SnapKit', '~> 3.0.2'
+  pod 'SnapKit’
 end
 
