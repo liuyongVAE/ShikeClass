@@ -17,6 +17,9 @@
 		08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */; };
 		08CE12DD1FA86B8500792844 /* IndexTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */; };
 		08CE12E01FAC3F7B00792844 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */; };
+		08CE12E41FAC4BAD00792844 /* leftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12E31FAC4BAD00792844 /* leftTableViewController.swift */; };
+		08CE12E61FAC625200792844 /* MineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12E51FAC625200792844 /* MineView.swift */; };
+		E02744D14EF6482D3755BEFE /* Pods_shikeClass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexTableViewCell.swift; sourceTree = "<group>"; };
 		08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexTableViewCell.xib; sourceTree = "<group>"; };
 		08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		08CE12E31FAC4BAD00792844 /* leftTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leftTableViewController.swift; sourceTree = "<group>"; };
+		08CE12E51FAC625200792844 /* MineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineView.swift; sourceTree = "<group>"; };
+		347AB151532B94E60410200E /* Pods-shikeClass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shikeClass.release.xcconfig"; path = "Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass.release.xcconfig"; sourceTree = "<group>"; };
+		C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shikeClass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB110E021098E205D1FDF9B1 /* Pods-shikeClass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shikeClass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08CE12E01FAC3F7B00792844 /* CoreLocation.framework in Frameworks */,
+				E02744D14EF6482D3755BEFE /* Pods_shikeClass.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +98,7 @@
 				08CE12C01FA7522E00792844 /* shikeClassUITests */,
 				08CE129F1FA7522E00792844 /* Products */,
 				08CE12DE1FAC3F7B00792844 /* Frameworks */,
+				B0E1F4B15DDB2C309FB36828 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,6 +181,7 @@
 			children = (
 				08CE12DA1FA86B8500792844 /* IndexTableViewCell.swift */,
 				08CE12DB1FA86B8500792844 /* IndexTableViewCell.xib */,
+				08CE12E51FAC625200792844 /* MineView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				08CE12D11FA753E800792844 /* IndexViewController.swift */,
+				08CE12E31FAC4BAD00792844 /* leftTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,8 +199,18 @@
 			isa = PBXGroup;
 			children = (
 				08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */,
+				C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B0E1F4B15DDB2C309FB36828 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB110E021098E205D1FDF9B1 /* Pods-shikeClass.debug.xcconfig */,
+				347AB151532B94E60410200E /* Pods-shikeClass.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,9 +220,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08CE12C61FA7522E00792844 /* Build configuration list for PBXNativeTarget "shikeClass" */;
 			buildPhases = (
+				788B880BCE5FDFDAEFFB23F8 /* [CP] Check Pods Manifest.lock */,
 				08CE129A1FA7522E00792844 /* Sources */,
 				08CE129B1FA7522E00792844 /* Frameworks */,
 				08CE129C1FA7522E00792844 /* Resources */,
+				311B5F709E756147D37E1850 /* [CP] Embed Pods Frameworks */,
+				A939597A41082BE6B6A5F195 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -320,14 +345,78 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		311B5F709E756147D37E1850 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/WCLImagePickerController/WCLImagePickerController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCLImagePickerController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		788B880BCE5FDFDAEFFB23F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-shikeClass-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A939597A41082BE6B6A5F195 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		08CE129A1FA7522E00792844 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				08CE12D61FA7591800792844 /* property.swift in Sources */,
+				08CE12E61FAC625200792844 /* MineView.swift in Sources */,
 				08CE12A21FA7522E00792844 /* AppDelegate.swift in Sources */,
 				08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */,
+				08CE12E41FAC4BAD00792844 /* leftTableViewController.swift in Sources */,
 				08CE12D21FA753E800792844 /* IndexViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +573,7 @@
 		};
 		08CE12C71FA7522E00792844 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB110E021098E205D1FDF9B1 /* Pods-shikeClass.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -499,6 +589,7 @@
 		};
 		08CE12C81FA7522E00792844 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 347AB151532B94E60410200E /* Pods-shikeClass.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

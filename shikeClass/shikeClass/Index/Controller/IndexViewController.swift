@@ -29,6 +29,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         request()
         self.setUI()
         self.setTV()
+        self.setMineUI()
         getLocation()
         UIScreen.main.brightness = 1
         print(UIScreen.main.brightness)
@@ -112,16 +113,64 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     //点击个人中心
     @objc func  touchMine(){
+       // self.tableview.removeFromSuperview()
+        UIView.animate(withDuration: 0.5, animations: {()-> Void in
+            
+            self.viewLeft.frame.origin.x = 0
+            
+        })
         
+    }
+    
+   @objc func touchReturn(){
+    
+    //print("-----")
+        UIView.animate(withDuration: 0.5, animations: {()-> Void in
+            
+            self.viewLeft.frame.origin.x = -SCREEN_WIDTH
+            
+        })
         
     }
     
     
+    var offsetX:CGFloat = 0
+    @objc func viewSwip(sender: UISwipeGestureRecognizer){
+        if sender.direction == UISwipeGestureRecognizerDirection.right{
+            self.viewLeft.transform = CGAffineTransform.init(translationX: -SCREEN_WIDTH, y: 0)
+        }
+        
+    }
+    
+  
+    let viewLeft = UIView();
+    let viewReturn = UIView();
     func setMineUI(){
-        let view = UIView()
-        view.frame = self.view.frame
-        view.backgroundColor = UIColor.blue
-        self.view.addSubview(view)
+    
+        //self.edgesForExtendedLayout = UIRectEdge(rawValue: UIRectEdge.RawValue(0))
+        viewLeft.frame = CGRect(x:-SCREEN_WIDTH,y:0,width:SCREEN_WIDTH,height:SCREEN_HEIGHT)
+        viewLeft.backgroundColor = UIColor.clear
+        
+        UIApplication.shared.windows.last?.addSubview(viewLeft)
+        viewLeft.isUserInteractionEnabled = true
+        
+        let btn = UIButton(frame:  CGRect(x:2*SCREEN_WIDTH/3,y:0,width:2*SCREEN_WIDTH/3,height:SCREEN_HEIGHT))
+        viewLeft.addSubview(btn)
+        
+        btn.addTarget(self, action: #selector(touchReturn), for: .touchUpInside)
+        let gesture = UISwipeGestureRecognizer()
+        gesture.addTarget(self, action: #selector(viewSwip(sender:)))
+       // viewReturn.addGestureRecognizer(gesture)
+       // let tap = UITapGestureRecognizer()
+       // tap.addTarget(self, action: #selector(touchReturn))
+       // tap.numberOfTapsRequired = 1
+      //viewLeft.addGestureRecognizer(tap)
+//        viewReturn.isUserInteractionEnabled = true
+//        viewReturn.addGestureRecognizer(tap)
+        
+        viewReturn.frame = CGRect(x:0,y:0,width:2*SCREEN_WIDTH/3,height:SCREEN_HEIGHT)
+        viewReturn.backgroundColor = naviColor
+        viewLeft.addSubview(viewReturn)
         
     }
     

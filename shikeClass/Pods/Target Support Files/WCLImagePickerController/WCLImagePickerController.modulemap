@@ -1,0 +1,6 @@
+framework module WCLImagePickerController {
+  umbrella header "WCLImagePickerController-umbrella.h"
+
+  export *
+  module * { export * }
+}

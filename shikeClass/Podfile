@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.3’
+use_frameworks!
+target ‘shikeClass’ do
+  pod ‘Alamofire’ 
+  pod ’SDWebImage’
+  pod 'WCLImagePickerController’
+  pod ’SVProgressHUD’
+  pod 'SnapKit', '~> 3.0.2'
+end
+
