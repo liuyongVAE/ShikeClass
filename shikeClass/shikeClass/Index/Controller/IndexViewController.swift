@@ -12,6 +12,8 @@ import CoreLocation
 
 class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate{
     
+    
+    fileprivate let Mview = MineView()
     fileprivate let locationManager:CLLocationManager = CLLocationManager()
     fileprivate let tableview:UITableView = UITableView()
     fileprivate var dataSource:[String:[String]] = [
@@ -47,6 +49,14 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         // 添加个人中心按钮
         let item = UIBarButtonItem(image:#imageLiteral(resourceName: "bottom_icon5"),style:.plain,target:self,action:#selector(touchMine))
         self.navigationItem.leftBarButtonItem = item
+        
+        //个人中心选单
+        
+        
+        self.viewReturn.addSubview(Mview.topBackview)
+        self.viewReturn.addSubview(Mview.bottomView)
+        
+        
     }
     
     //定位相关
@@ -149,7 +159,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
         //self.edgesForExtendedLayout = UIRectEdge(rawValue: UIRectEdge.RawValue(0))
         viewLeft.frame = CGRect(x:-SCREEN_WIDTH,y:0,width:SCREEN_WIDTH,height:SCREEN_HEIGHT)
-        viewLeft.backgroundColor = UIColor.clear
+        viewLeft.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         
         UIApplication.shared.windows.last?.addSubview(viewLeft)
         viewLeft.isUserInteractionEnabled = true

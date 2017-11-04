@@ -57,6 +57,18 @@ func getWidth(_ width :Double) -> CGFloat {
     return  CGFloat(width/750)*(SCREEN_WIDTH)
 }
 
+
+public func Rect(_ x:Double,_ y:Double,_ w:Double,_ h:Double)->CGRect{
+    
+    return CGRect(x:getWidth(x),y:getHeight(y),width:getWidth(w),height:getHeight(h))
+}
+public func FloatRect(_ x:CGFloat,_ y:CGFloat,_ w:CGFloat,_ h:CGFloat)->CGRect{
+    
+    return CGRect(x:x,y:y,width:w,height:h)
+}
+
+
+
 let naviColor = hexStringToColor(hexString: "#d33a32")
 let title2color = hexStringToColor(hexString: "#7a7a7a")
 let backColor = hexStringToColor(hexString:"#fafafa")
