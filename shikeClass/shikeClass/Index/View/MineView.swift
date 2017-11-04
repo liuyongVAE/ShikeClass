@@ -156,8 +156,7 @@ class MineView{
         button.frame = FloatRect(0,getHeight(18+98*3),SCREEN_WIDTH*2/3,getHeight(98))
         button.setTitle("设置", for: .normal)
         //button.backgroundColor = UIColor.blue
-        button.setTitleColor(title1s"?'"""Color, for: .normal)
-        button.titleLabel?.textAlignment = .left;
+        button.setTitleColor(title1Color, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: getHeight(32))
         //button.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
         let image = UIImageView()
@@ -175,7 +174,7 @@ class MineView{
         line.backgroundColor = lineColor
         button.addSubview(line)
         button.tag = 3
-   
+        button.titleLabel?.textAlignment = .left
         
         
         return button

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		084F19EC1FAE07D200BC1003 /* LessonCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F19EB1FAE07D200BC1003 /* LessonCollectionViewController.swift */; };
 		08CE12A21FA7522E00792844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12A11FA7522E00792844 /* AppDelegate.swift */; };
 		08CE12A91FA7522E00792844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08CE12A81FA7522E00792844 /* Assets.xcassets */; };
 		08CE12AC1FA7522E00792844 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CE12AA1FA7522E00792844 /* LaunchScreen.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		084F19EB1FAE07D200BC1003 /* LessonCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCollectionViewController.swift; sourceTree = "<group>"; };
 		08CE129E1FA7522E00792844 /* shikeClass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shikeClass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CE12A11FA7522E00792844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08CE12A81FA7522E00792844 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		084F19EA1FAE06F900BC1003 /* LessonSheet */ = {
+			isa = PBXGroup;
+			children = (
+				084F19EB1FAE07D200BC1003 /* LessonCollectionViewController.swift */,
+			);
+			path = LessonSheet;
+			sourceTree = "<group>";
+		};
 		08CE12951FA7522E00792844 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 			children = (
 				08CE12AD1FA7522E00792844 /* Info.plist */,
 				08CE12A81FA7522E00792844 /* Assets.xcassets */,
+				084F19EA1FAE06F900BC1003 /* LessonSheet */,
 				08CE12D41FA758FA00792844 /* Other */,
 				08CE12D31FA754D500792844 /* File */,
 				08CE12D01FA7532900792844 /* Index */,
@@ -414,6 +425,7 @@
 				08CE12E61FAC625200792844 /* MineView.swift in Sources */,
 				08CE12A21FA7522E00792844 /* AppDelegate.swift in Sources */,
 				08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */,
+				084F19EC1FAE07D200BC1003 /* LessonCollectionViewController.swift in Sources */,
 				08CE12E41FAC4BAD00792844 /* leftTableViewController.swift in Sources */,
 				08CE12D21FA753E800792844 /* IndexViewController.swift in Sources */,
 			);

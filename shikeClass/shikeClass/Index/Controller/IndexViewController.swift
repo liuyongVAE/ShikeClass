@@ -25,17 +25,26 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     ]
 
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
+        self.setMineUI()
         self.setUI()
         self.setTV()
-        self.setMineUI()
+       
         getLocation()
         UIScreen.main.brightness = 1
         print(UIScreen.main.brightness)
         // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.touchReturn()
     }
     
     fileprivate func  setUI(){
@@ -59,7 +68,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
     }
     
-    //定位相关
+    //MARK: -  定位相关
     
     func  getLocation(){
         showEventAcessDeniedAlert()
@@ -121,7 +130,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     
-    //点击个人中心
+    //MARK: - 点击个人中心
     @objc func  touchMine(){
        // self.tableview.removeFromSuperview()
         UIView.animate(withDuration: 0.5, animations: {()-> Void in
@@ -182,8 +191,32 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         viewReturn.backgroundColor = naviColor
         viewLeft.addSubview(viewReturn)
         
+        //设置点击事件
+        self.Mview.classBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
+        self.Mview.fileBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
+        self.Mview.signBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
+        self.Mview.settingBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
+        
     }
     
+    //左侧按钮点击事件
+    @objc func leftTouchFunc(btn:UIButton){
+        switch btn.tag {
+        case 0:
+            let layout = UICollectionViewFlowLayout()
+            self.navigationController?.pushViewController(LessonCollectionViewController(collectionViewLayout:layout), animated: true)
+            print("lessonSheet")
+        case 1:
+            print("myfile")
+        case 2:
+            print("mySign")
+        case 3:
+            print("setting")
+        default:
+            return
+        }
+        
+    }
     
     
     
@@ -227,6 +260,8 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.ClassName.sizeToFit()
         cell.time.sizeToFit()
         cell.location.sizeToFit()
+        cell.SignButton.addTarget(self, action: #selector(didTouchSign(btn:)), for: .touchUpInside)
+        
         
         
         return cell
@@ -248,6 +283,30 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
         
         return line
+    }
+    
+    @objc func didTouchSign(btn:UIButton){
+        
+        let alertController = UIAlertController(title:"提示",message:"请输入签到码",preferredStyle:.alert)
+    
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alertController.addTextField(configurationHandler: ({
+            (text:UITextField) in
+                text.keyboardType = .numberPad
+                text.placeholder = "签到码"
+        }))
+        
+        let okAction = UIAlertAction(title:"确认",style:.default,handler:{
+            action in
+               let login = alertController.textFields?.first!
+               print(login?.text)
+        })
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     
