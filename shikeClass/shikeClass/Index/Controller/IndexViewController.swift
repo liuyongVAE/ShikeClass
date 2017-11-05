@@ -201,10 +201,12 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     //左侧按钮点击事件
     @objc func leftTouchFunc(btn:UIButton){
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
         switch btn.tag {
         case 0:
             let layout = UICollectionViewFlowLayout()
-            self.navigationController?.pushViewController(LessonCollectionViewController(collectionViewLayout:layout), animated: true)
+        self.navigationController?.pushViewController(LessonCollectionViewController(collectionViewLayout:layout), animated: true)
             print("lessonSheet")
         case 1:
             print("myfile")
