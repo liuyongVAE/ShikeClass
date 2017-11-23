@@ -42,13 +42,16 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         // Do any additional setup after loading the view.
     }
     
+
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         self.touchReturn()
     }
     
     fileprivate func  setUI(){
-
+      
+        
         self.navigationItem.title = "时课"
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -60,7 +63,6 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.navigationItem.leftBarButtonItem = item
         
         //个人中心选单
-        
         
         self.viewReturn.addSubview(Mview.topBackview)
         self.viewReturn.addSubview(Mview.bottomView)
@@ -105,8 +107,6 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             alertController.addAction(setting)
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
-            
-            
             
         }
         
@@ -209,7 +209,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.navigationController?.pushViewController(LessonCollectionViewController(collectionViewLayout:layout), animated: true)
             print("lessonSheet")
         case 1:
-            print("myfile")
+            self.navigationController?.pushViewController(MyFileTableViewController(), animated: true)
         case 2:
             print("mySign")
         case 3:
@@ -263,9 +263,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.time.sizeToFit()
         cell.location.sizeToFit()
         cell.SignButton.addTarget(self, action: #selector(didTouchSign(btn:)), for: .touchUpInside)
-        
-        
-        
+    
         return cell
     }
     
@@ -330,7 +328,6 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             self.dataSource["time"]?.append("周一 上午8：00-9:50")
             self.dataSource["position"]?.append("E4-102")
     }
-    
     
     
     

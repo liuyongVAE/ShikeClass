@@ -52,13 +52,13 @@ class IndexTableViewCell: UITableViewCell {
         
         let TimeImage = UIImageView()
         TimeImage.frame = CGRect(x:getWidth(30),y:getHeight(78),width:getWidth(30),height:getHeight(30))
-        TimeImage.image = #imageLiteral(resourceName: "bottom_icon5")
+        TimeImage.image = #imageLiteral(resourceName: "时钟")
         self.addSubview(TimeImage)
         
         
         let LocationImage = UIImageView()
         LocationImage.frame = CGRect(x:getWidth(30),y:getHeight(125),width:getWidth(30),height:getHeight(30))
-        LocationImage.image = #imageLiteral(resourceName: "bottom_icon5")
+        LocationImage.image = #imageLiteral(resourceName: "位置")
         self.addSubview(LocationImage)
         
         
@@ -109,12 +109,12 @@ class IndexTableViewCell: UITableViewCell {
         
         let FileImage = UIImageView()
         FileImage.frame = CGRect(x:getWidth(30),y:getHeight(19),width:getWidth(30),height:getHeight(30))
-        FileImage.image = #imageLiteral(resourceName: "bottom_icon5")
+        FileImage.image = #imageLiteral(resourceName: "文件夹 空心")
         fileButton.addSubview(FileImage)
         
         let rightImage = UIImageView()
         rightImage.frame = CGRect(x: SCREEN_WIDTH - getWidth(60),y:getHeight(19),width:getWidth(43),height:getHeight(43))
-        rightImage.image = #imageLiteral(resourceName: "bottom_icon5")
+        rightImage.image = #imageLiteral(resourceName: "更多")
         fileButton.addSubview(rightImage)
         
     

@@ -39,7 +39,7 @@ class MineView{
     lazy var MineImage:UIButton = {
         let btn = UIButton()
         btn.frame = Rect(165, 68, 130, 130)
-        btn.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "我的"), for: .normal)
         return btn
 
     }()
@@ -80,7 +80,7 @@ class MineView{
         //button.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
         let image = UIImageView()
         image.frame = Rect(40, 20, 50, 50)
-        image.image = #imageLiteral(resourceName: "bottom_icon5");
+        image.image = #imageLiteral(resourceName: "博士帽");
         button.addSubview(image)
         let line = UIView()
         let line1 = UIView()
@@ -109,7 +109,7 @@ class MineView{
         //button.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
         let image = UIImageView()
         image.frame = Rect(40, 20, 50, 50)
-        image.image = #imageLiteral(resourceName: "bottom_icon5");
+        image.image = #imageLiteral(resourceName: "文件夹 空心");
         button.addSubview(image)
         let line = UIView()
         let line1 = UIView()
@@ -135,7 +135,7 @@ class MineView{
         //button.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
         let image = UIImageView()
         image.frame = Rect(40, 20, 50, 50)
-        image.image = #imageLiteral(resourceName: "bottom_icon5");
+        image.image = #imageLiteral(resourceName: "签到");
         button.addSubview(image)
         let line = UIView()
         let line1 = UIView()
@@ -161,7 +161,7 @@ class MineView{
         //button.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
         let image = UIImageView()
         image.frame = Rect(40, 20, 50, 50)
-        image.image = #imageLiteral(resourceName: "bottom_icon5");
+        image.image = #imageLiteral(resourceName: "排行榜");
         button.addSubview(image)
         let line = UIView()
         let line1 = UIView()
