@@ -113,7 +113,7 @@ class IndexTableViewCell: UITableViewCell {
         fileButton.addSubview(FileImage)
         
         let rightImage = UIImageView()
-        rightImage.frame = CGRect(x: SCREEN_WIDTH - getWidth(60),y:getHeight(19),width:getWidth(43),height:getHeight(43))
+        rightImage.frame = Rect(700, 15, 26, 40)
         rightImage.image = #imageLiteral(resourceName: "更多")
         fileButton.addSubview(rightImage)
         

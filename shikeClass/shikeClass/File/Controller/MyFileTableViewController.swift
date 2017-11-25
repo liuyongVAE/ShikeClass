@@ -71,6 +71,9 @@ class MyFileTableViewController: UITableViewController {
         
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(FileDetailTableView(), animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.

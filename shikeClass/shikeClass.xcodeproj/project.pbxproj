@@ -22,6 +22,9 @@
 		08CE12E01FAC3F7B00792844 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */; };
 		08CE12E41FAC4BAD00792844 /* leftTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12E31FAC4BAD00792844 /* leftTableViewController.swift */; };
 		08CE12E61FAC625200792844 /* MineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE12E51FAC625200792844 /* MineView.swift */; };
+		08E370FD1FC92B41005FEE4D /* FileDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E370FC1FC92B41005FEE4D /* FileDetailTableViewCell.swift */; };
+		08E370FF1FC92B8B005FEE4D /* FileDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E370FE1FC92B8B005FEE4D /* FileDetailTableView.swift */; };
+		08E371011FC92FFC005FEE4D /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E371001FC92FFC005FEE4D /* MyViewController.swift */; };
 		E02744D14EF6482D3755BEFE /* Pods_shikeClass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +67,9 @@
 		08CE12DF1FAC3F7B00792844 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		08CE12E31FAC4BAD00792844 /* leftTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leftTableViewController.swift; sourceTree = "<group>"; };
 		08CE12E51FAC625200792844 /* MineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineView.swift; sourceTree = "<group>"; };
+		08E370FC1FC92B41005FEE4D /* FileDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetailTableViewCell.swift; sourceTree = "<group>"; };
+		08E370FE1FC92B8B005FEE4D /* FileDetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetailTableView.swift; sourceTree = "<group>"; };
+		08E371001FC92FFC005FEE4D /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		347AB151532B94E60410200E /* Pods-shikeClass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shikeClass.release.xcconfig"; path = "Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass.release.xcconfig"; sourceTree = "<group>"; };
 		C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shikeClass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB110E021098E205D1FDF9B1 /* Pods-shikeClass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shikeClass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				085FE5E11FC6B2AF004828B9 /* MyFileTableViewCell.swift */,
+				08E370FC1FC92B41005FEE4D /* FileDetailTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -123,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				085FE5DF1FC6B0F4004828B9 /* MyFileTableViewController.swift */,
+				08E370FE1FC92B8B005FEE4D /* FileDetailTableView.swift */,
+				08E371001FC92FFC005FEE4D /* MyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -453,12 +462,15 @@
 			files = (
 				08CE12D61FA7591800792844 /* property.swift in Sources */,
 				08CE12E61FAC625200792844 /* MineView.swift in Sources */,
+				08E370FF1FC92B8B005FEE4D /* FileDetailTableView.swift in Sources */,
 				08CE12A21FA7522E00792844 /* AppDelegate.swift in Sources */,
 				08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */,
+				08E370FD1FC92B41005FEE4D /* FileDetailTableViewCell.swift in Sources */,
 				084F19EC1FAE07D200BC1003 /* LessonCollectionViewController.swift in Sources */,
 				085FE5E21FC6B2AF004828B9 /* MyFileTableViewCell.swift in Sources */,
 				08CE12E41FAC4BAD00792844 /* leftTableViewController.swift in Sources */,
 				08CE12D21FA753E800792844 /* IndexViewController.swift in Sources */,
+				08E371011FC92FFC005FEE4D /* MyViewController.swift in Sources */,
 				085FE5E01FC6B0F4004828B9 /* MyFileTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
