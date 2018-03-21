@@ -8,7 +8,8 @@
 
 import UIKit
 import CoreLocation
-
+import Alamofire
+import SVProgressHUD
 
 class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate{
     
@@ -16,12 +17,17 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     fileprivate let Mview = MineView()
     fileprivate let locationManager:CLLocationManager = CLLocationManager()
     fileprivate let tableview:UITableView = UITableView()
+    fileprivate var characterInfo:[String:String] = [
+        "character":"",
+        "userLabel":"",
+        "userNum":""
+    ]
     fileprivate var dataSource:[String:[String]] = [
         "name":[],
         "time":[],
         "position":[],
         "status":[],
-        "id":[]
+        "id":[],
     ]
 
     
@@ -31,6 +37,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        readInfo()
         request()
         self.setMineUI()
         self.setUI()
@@ -48,6 +55,28 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     override func viewWillDisappear(_ animated: Bool) {
         self.touchReturn()
     }
+    //读取用户信息
+    
+    func readInfo(){
+        let usd = UserDefaults.standard
+        if let ss = usd.string(forKey: "character"){
+            self.characterInfo["character"]! = ss
+        }
+        
+        //读取不到就是未登录状态
+        if let ss = usd.string(forKey: "userNum"){
+            self.characterInfo["userNum"]! = ss
+        }else{
+            
+            
+        }
+        if let ss = usd.string(forKey: "userLabel"){
+            self.characterInfo["userLabel"]! = ss
+        }
+        
+    }
+    
+    
     
     fileprivate func  setUI(){
       
@@ -60,6 +89,7 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         // 添加个人中心按钮
         let item = UIBarButtonItem(image:#imageLiteral(resourceName: "bottom_icon5"),style:.plain,target:self,action:#selector(touchMine))
+        item.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem = item
         
         //个人中心选单
@@ -214,6 +244,8 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             print("mySign")
         case 3:
             print("setting")
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            
         default:
             return
         }
@@ -308,25 +340,89 @@ class IndexViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.present(alertController, animated: true, completion: nil)
         
     }
-    
+    //MARK: - 转换时间
+    func timeFormat(_ tt:Int)->String{
+        let date  =  Date.init(timeIntervalSince1970: TimeInterval(tt/1000))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter.string(from: date)
+        
+    }
     
     
     
     // MARK: - 网络请求
     
         func request(){
-             self.dataSource["id"]?.append("1233")
-            self.dataSource["name"]?.append("高等数学A（一）")
-            self.dataSource["time"]?.append("周一 上午8：00-9:50")
-            self.dataSource["position"]?.append("E4-102")
-            self.dataSource["id"]?.append("1233")
-            self.dataSource["name"]?.append("高等数学A（一）")
-            self.dataSource["time"]?.append("周一 上午8：00-9:50")
-            self.dataSource["position"]?.append("E4-102")
-            self.dataSource["id"]?.append("1233")
-            self.dataSource["name"]?.append("高等数学A（一）")
-            self.dataSource["time"]?.append("周一 上午8：00-9:50")
-            self.dataSource["position"]?.append("E4-102")
+            
+            let url = rootURL + "/shikeya/api/lesson_search"
+                let id = characterInfo["userNum"]!
+                
+                let paramete = ["student_id":"\(id)"]
+                // print(paramete,url)
+                
+                Alamofire.request(url, method: .post,parameters:paramete).responseJSON(completionHandler: {
+                    response in
+                    if let al = response.response{
+                        // print(al)
+                        SVProgressHUD.dismiss(withDelay: 1.5)
+                        
+                    }else{
+                        SVProgressHUD.showError(withStatus: "网络连接失败")
+                    }
+                    var new =  self.dataSource
+
+                    if let js = response.result.value{
+                        let json = JSON(js)
+                        print(json)
+                        if json["status"].string! == "200"{
+                            
+                            let result = json["data"]
+
+                            if json["data"].count>0{
+                              for i in 0...json["data"].count-1{
+                               if let ss = result[i]["lesson_id"].string{
+                                    new["id"]?.append(ss);
+                                    var mm = ss
+                                   let index = mm.index(mm.startIndex, offsetBy: 3);
+                                   mm =  mm.substring(from: index);
+                                   new["position"]?.append(mm);
+                                }
+                                if let ss = result[i]["lesson_name"].string{
+                                    new["name"]?.append(ss);
+                                }
+                                if let ss = result[i]["start_time"].int{
+                                    let t1 = self.timeFormat(ss)
+                                    let t2 = self.timeFormat(result[i]["end_time"].int!)
+                                    new["time"]?.append(t1+" - "+t2);
+                                }
+                                
+                              }
+                                
+                            }else{
+                                //如果没有课，添加默认数据；
+                                new["id"]?.append("1233")
+                                new["name"]?.append("今日暂无课程！");
+                                new["time"]?.append("周一 上午8：00-9:50");
+                                new["position"]?.append("E4-102");
+
+                            }
+                            // SVProgressHUD.showSuccess(withStatus: "")
+                        }else{
+                            
+                            SVProgressHUD.showInfo(withStatus: json["data"].string!)
+                            
+                        }
+                        
+                        //刷新
+                        self.dataSource = new;
+                        self.tableview.reloadData()
+                        
+                        
+                    }
+                    
+                })
+            
     }
     
     

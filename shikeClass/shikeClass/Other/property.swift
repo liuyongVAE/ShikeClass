@@ -69,8 +69,11 @@ public func FloatRect(_ x:CGFloat,_ y:CGFloat,_ w:CGFloat,_ h:CGFloat)->CGRect{
 
 
 
-let naviColor = hexStringToColor(hexString: "#d33a32")
+let naviColor = UIColor.init(red: 211/255, green: 50/225, blue: 62/255, alpha: 1)
 let title2color = hexStringToColor(hexString: "#7a7a7a")
 let backColor = hexStringToColor(hexString:"#fafafa")
 let lineColor = hexStringToColor(hexString:"#dddddd")
 let title1Color = hexStringToColor(hexString:"#333333")
+let rootURL = "http://112.74.41.60"
+
+
