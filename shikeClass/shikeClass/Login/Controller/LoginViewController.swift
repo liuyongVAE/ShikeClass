@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
     
     func saveInfo(_ Character:String,_ name:String,_ psw:String){
         let userDefault = UserDefaults.standard
-        userDefault.set(Character, forKey: "Character")
+        userDefault.set(Character, forKey: "character")
         userDefault.set(name, forKey: "userLabel")
         userDefault.set(psw, forKey: "userNum")
     }
@@ -73,8 +73,8 @@ class LoginViewController: UIViewController {
                         self.saveInfo("stu",pas,id);}else{
                         self.saveInfo("tea",pas,id)
                     }
-                    
-                    self.present(UINavigationController.init(rootViewController: IndexViewController()), animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
+                    //self.navigationController?.pushViewController(IndexViewController(), animated: true)//present(UINavigationController.init(rootViewController: IndexViewController()), animated: true, completion: nil)
 
                 }else{
                     SVProgressHUD.showInfo(withStatus: json["data"].string!)

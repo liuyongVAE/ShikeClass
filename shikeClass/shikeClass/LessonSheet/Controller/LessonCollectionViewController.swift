@@ -13,7 +13,11 @@ private let reuseIdentifier = "Cell"
 class LessonCollectionViewController: UICollectionViewController {
     
     
+    //Model
     
+    fileprivate var lessonSheetData:LessonSheetModel = LessonSheetModel()
+    
+    //View
     let itemWidth =  SCREEN_WIDTH/8
     let itemInterval = 0.0//SCREEN_WIDTH/48
     let itemHeight = SCREEN_HEIGHT/6
@@ -38,6 +42,7 @@ class LessonCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
         setUI()
         self.collectionView?.backgroundColor = backColor
         self.collectionView?.frame = UIScreen.main.bounds
@@ -137,6 +142,7 @@ class LessonCollectionViewController: UICollectionViewController {
     
     }
     
+    
 
     /*
     // MARK: - Navigation
@@ -158,66 +164,126 @@ class LessonCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 7*5
+       return 7*5
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = UIColor.randomColor
         
       //填写课程名
         let label = UILabel()
         label.frame = cell.contentView.frame
-        label.text = "高等高等数学A（-）1-3节 E4-102"
+
+        label.text = ""
+        cell.backgroundColor = UIColor.clear
+        if (self.lessonSheetData.lessonPosition?.contains(indexPath.row))! {
+            print(indexPath.row)
+            label.text = lessonSheetData.lessonName?[(lessonSheetData.lessonPosition?.index(of: indexPath.row))!];
+            // lessonSheetData.lessonName?.removeFirst()
+            cell.backgroundColor = UIColor.randomColor
+        }
         label.font = UIFont.systemFont(ofSize: getHeight(26))
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         //label.sizeToFit()
         label.textColor = UIColor.white
         cell.addSubview(label)
-        if indexPath.row == 6 || indexPath.row == 27 || indexPath.row == 3 || indexPath.row == 9{
-            label.text = ""
-            cell.backgroundColor = UIColor.clear
-        }
+
         // Configure the cell
     
         return cell
     }
     
 
-
- //MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
+    
 
 }
+
+
+extension LessonCollectionViewController{
+    func request(){
+        
+        let url = rootURL + "/shikeya/api/lesson_search_all"
+        let id = "1525122009"
+        
+        let paramete = ["student_id":"\(id)"]
+        var new:LessonSheetModel!
+        AlaRequestManager.shared.postRequest(urlString: url, params: paramete as [String : AnyObject], success:{
+            (js:JSON)-> () in
+            
+            if js["status"].string! == "200"{
+                let cc = js["data"].count
+                new = LessonSheetModel()
+                new.length = cc;
+                new.todayWeek = "1"
+            
+                
+                print(js)
+                if cc>0{
+                    for i in 0...cc{
+                        if let sna = js["data"][i]["lesson_id"].string{
+                            new.lessonId?.append(sna)
+                            var time1 = String(sna[sna.startIndex])
+                            var time = String(sna[sna.startIndex])
+                            new.lessonWeek?.append(Int(time1)!)
+                            let index = sna.index(sna.startIndex, offsetBy: 1)
+                            var index2 = sna.index(sna.startIndex, offsetBy: 2)
+                            time = String(sna[index])
+                            //计算行列
+                            new.lessonPosition?.append(self.calculateClassNum(row:Int(time)!, col:Int(time1)! ))
+                            
+                            new.lessonTime?.append(time)
+                            index2 = sna.index(sna.startIndex, offsetBy: 3)
+                            time = String(sna[index2...])
+                            new.lessonAdress?.append(time)
+                            
+                            
+                        }else{
+                             new.lessonId?.append("")
+                        }
+                        
+                        if let sna = js["data"][i]["lesson_name"].string{
+                            new.lessonName?.append(sna)
+                        }else{
+                            new.lessonName?.append("")
+                        }
+                      
+                        
+                        
+                        
+                    }
+                }
+                
+                    self.lessonSheetData = new
+                    self.collectionView?.reloadData()
+                    print(new)
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+        }, failture:{ error -> () in
+              print(error)
+            }
+     )
+    }
+    
+    
+    func calculateClassNum(row:Int,col:Int)->Int{
+        return  (row-1)*7 + col
+    }
+
+    
+    
+}
+
+
+
 
 extension UIColor{
     class var randomColor: UIColor {
