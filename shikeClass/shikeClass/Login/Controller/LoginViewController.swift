@@ -35,6 +35,11 @@ class LoginViewController: UIViewController {
             [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = naviColor
+        //let image = #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal)
+        let itemRight = UIBarButtonItem(image:#imageLiteral(resourceName: "帮助"),style:.plain,target:self,action:#selector(touchMore))
+        itemRight.tag = 0;
+        itemRight.tintColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = itemRight
     }
     
     func saveInfo(_ Character:String,_ name:String,_ psw:String){
@@ -46,6 +51,25 @@ class LoginViewController: UIViewController {
         print(userDefault.string(forKey: "userNum"))
     }
     
+    
+    
+    @objc func touchMore(){
+        
+        
+        let al = UIAlertController.init(title: "账号检测说明", message: "时课尚处于内测状态，未开放注册，点击使用测试账号登录即可体验全部功能！", preferredStyle: .alert)
+        al.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        al.addAction(UIAlertAction.init(title: "使用测试账号登录", style: .default, handler: ({
+            action in
+            
+            self.loginView.userNum.text =  "1525122009"
+            self.loginView.userLabel.text = "小明"
+            self.Alarequest()
+            
+        })))
+
+        self.present(al, animated: true, completion: nil)
+        
+    }
     
     
    @objc func Alarequest(){
@@ -84,10 +108,18 @@ class LoginViewController: UIViewController {
                     SVProgressHUD.showSuccess(withStatus: "登录成功")
                     if (self.loginView.segment.selectedSegmentIndex==0){
                         self.saveInfo("stu",pas,id);}else{
-                        self.saveInfo("tea",pas,id)
+                        if let name = json["data"]["teacher"]["teacher_name"].string{
+                            self.saveInfo("tea",name,id)
+                        }else{
+                            self.saveInfo("tea",id,id)
+                        }
+                        
                     }
+                   
+                    self.navigationController?.pushViewController(IndexViewController(), animated: true)
                     //self.navigationController?.view.viewDidLoad()
-                    self.navigationController?.popToRootViewController(animated: true)
+                   // let vc = UINavigationController.init(rootViewController: IndexViewController())
+                  //self.navigationController?.popToRootViewController(animated: true)
                     //self.navigationController?.pushViewController(IndexViewController(), animated: true)//present(UINavigationController.init(rootViewController: IndexViewController()), animated: true, completion: nil)
 
                 }else{

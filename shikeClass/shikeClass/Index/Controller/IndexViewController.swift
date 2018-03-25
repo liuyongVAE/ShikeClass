@@ -14,13 +14,7 @@ import SVProgressHUD
 class IndexViewController: UIViewController,CLLocationManagerDelegate{
     
     //Model
-    var characterInfo:[String:String] = [
-        "character":"",
-        "userLabel":"",
-        "userNum":"",
-        "isLogin":"",
-        "isEmpty":""
-    ]
+    var characterInfo:[String:String]!
     var dataSource:IndexModel!
     //View
     let Mview = MineView()
@@ -32,12 +26,7 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
  
     
     override func viewWillAppear(_ animated: Bool) {
-        dataSource = IndexModel.init()
-        readInfo()
-        request()
-        self.setMineUI()
-        self.setUI()
-        self.setTV()
+
     }
     override func viewDidDisappear(_ animated: Bool) {
        // self.dataSource.dataSource.removeAll()
@@ -46,7 +35,12 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        dataSource = IndexModel.init()
+        readInfo()
+        request()
+        self.setMineUI()
+        self.setUI()
+        self.setTV()
 
        
         getLocation()
@@ -65,6 +59,13 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
     
     func readInfo(){
     
+        self.characterInfo = [
+        "character":"",
+        "userLabel":"",
+        "userNum":"",
+        "isLogin":"",
+        "isEmpty":""
+        ]
         let usd = UserDefaults.standard
         if let ss = usd.string(forKey: "character"){
             self.characterInfo["character"]! = ss

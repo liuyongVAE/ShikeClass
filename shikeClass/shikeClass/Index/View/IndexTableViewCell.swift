@@ -88,6 +88,7 @@ class IndexTableViewCell: UITableViewCell {
         SignButton.backgroundColor = naviColor
         SignButton.titleLabel?.font = UIFont.systemFont(ofSize: getHeight(30))
         SignButton.titleLabel?.numberOfLines = 0
+        SignButton.setTitle("已签到", for:.selected)
         self.addSubview(SignButton)
         
         fileButton.frame = CGRect(x:0,y:getHeight(171),width:SCREEN_WIDTH,height:getHeight(70))

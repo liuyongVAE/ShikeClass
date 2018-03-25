@@ -50,7 +50,7 @@ class SettingView: UIView {
           usd.removeObject(forKey: "character")
           usd.removeObject(forKey: "userLabel")
         }
-        
+        print(usd.string(forKey: "userLabel"),usd.string(forKey: "character"),usd.string(forKey: "userLabel"))
     }
     
     

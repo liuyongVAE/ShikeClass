@@ -14,6 +14,11 @@ class MyFileTableViewController: UITableViewController {
         super.viewDidLoad()
         netRequest()
        self.navigationItem.title = "我的文件"
+        self.navigationController?.navigationBar.barTintColor = naviColor
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.isTranslucent = false
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -62,10 +67,33 @@ class MyFileTableViewController: UITableViewController {
     }
     
     func netRequest(){
-        for  _ in 0...5{
-        database["Filename"]?.append("高等数学")
-        database["numofFile"]?.append("共9个文件")
-        }
+     
+        let url = rootURL + "/shikeya/api/file_search_sid"
+        let params:[String:String] = {
+            if let mm = UserDefaults.standard.string(forKey: "userNum"){
+                return ["sid":mm]
+            }else{
+                
+                return [:]
+            }
+        }()
+        
+        AlaRequestManager.shared.postRequest(urlString: url, params: params as [String:AnyObject], success:({
+            js in
+            print(js)
+        
+        }), failture: ({
+            
+            error in print(error)
+            
+        }))
+        
+        
+        
+        
+        
+        
+        
         print(database)
         self.tableView.reloadData()
         

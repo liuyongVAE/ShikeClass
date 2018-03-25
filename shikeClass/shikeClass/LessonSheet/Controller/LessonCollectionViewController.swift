@@ -63,7 +63,9 @@ class LessonCollectionViewController: UICollectionViewController {
     
     // MARK: - setUI
     func setUI(){
-        
+
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = naviColor
         self.navigationItem.title = "我的课程"
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -231,7 +233,7 @@ extension LessonCollectionViewController{
                             new.lessonWeek?.append(Int(time1)!)
                             let index = sna.index(sna.startIndex, offsetBy: 1)
                             var index2 = sna.index(sna.startIndex, offsetBy: 2)
-                            time = String(sna[index])
+                            time = String(sna[index2])
                             //计算行列
                             new.lessonPosition?.append(self.calculateClassNum(row:Int(time)!, col:Int(time1)! ))
                             
@@ -278,7 +280,11 @@ extension LessonCollectionViewController{
     
     
     func calculateClassNum(row:Int,col:Int)->Int{
-        return  (row-1)*7 + col
+        var rownew = row;
+        if row>2{
+            rownew = row-1;
+        }
+        return  (rownew-1)*7 + col - 1
     }
 
     

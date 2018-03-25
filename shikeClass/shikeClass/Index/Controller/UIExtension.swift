@@ -25,15 +25,12 @@ extension IndexViewController{
         item.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem = item
         
-        var image = #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal)
+        let image = #imageLiteral(resourceName: "帮助")
         // image = UIImage.ini
         
         let itemRight = UIBarButtonItem(image:image,style:.plain,target:self,action:#selector(touchMore(_:)))
         itemRight.tag = 0;
-
-        //item.tintColor = UIColor.white
-
-        
+        itemRight.tintColor = UIColor.white
         self.navigationItem.rightBarButtonItem = itemRight
         
         //个人中心选单
@@ -45,6 +42,7 @@ extension IndexViewController{
         Mview.NameLabel.sizeToFit()
         if characterInfo["character"] == "stu"{
             Mview.NumLabel.text = self.characterInfo["userNum"];
+            Mview.NumLabel.sizeToFit()
         }
         
     }
@@ -54,7 +52,7 @@ extension IndexViewController{
     
     @objc func  touchMore(_ sender:UIButton){
         
-        let al = UIAlertController.init(title: "软件说明", message: "1.签到功能会检测您当前的位置，请开启定位权限\n2.您在程序暂时挂起和锁屏时不会被检测为课堂暂离状态   \n3.当您尝试切换应用、点击home键进入主菜单、尝试杀死应用时，都会触发暂离状态检测，请不要在课堂尝试\n4.当您不小心触发暂离状态，我们会给予三分钟的时限让您返回 。用\n5.时课团队祝您学习进步！", preferredStyle: .alert)
+        let al = UIAlertController.init(title: "软件说明", message: "1.签到功能会检测您当前的位置，请开启定位权限\n2.您在程序暂时挂起和锁屏时不会被检测为课堂暂离状态   \n3.当您尝试切换应用、点击home键进入主菜单、尝试杀死应用时，都会触发暂离状态检测，请不要在课堂尝试\n4.当您不小心触发暂离状态，我们会给予三分钟的时限让您返回\n5.时课团队祝您学习进步！", preferredStyle: .alert)
         al.addAction(UIAlertAction.init(title: "我知道啦", style: .cancel, handler: nil))
         self.present(al, animated: true, completion: nil)
         

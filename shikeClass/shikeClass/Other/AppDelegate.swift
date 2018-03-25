@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // window?.rootViewController = IndexViewController()
       // self.window?.rootViewController = vc
         let vc  = IndexViewController()
-        self.window?.rootViewController = UINavigationController(rootViewController:vc)
+        self.window?.rootViewController = CusTomTabBar() //UINavigationController(rootViewController:self.CusTomTabBar())
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = UIColor.white
         // Override point for customization after application launch.
@@ -131,6 +131,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
     }
+    
+    
+    func CusTomTabBar() ->UITabBarController{
+        let vc1 = IndexViewController()
+        let vc2 = LessonCollectionViewController.init(collectionViewLayout: UICollectionViewFlowLayout.init())
+        let vc3 = MyFileTableViewController()
+        // let vc5 = IndexViewController()
+        
+        
+        let nvc1:UINavigationController = UINavigationController(rootViewController: vc1)
+        let nvc2:UINavigationController = UINavigationController(rootViewController: vc2)
+        let nvc3:UINavigationController = UINavigationController(rootViewController: vc3)
+        
+       // nvc2.navigationItem.title = "课程表"
+       // nvc3.navigationItem.title = "文件"
+        
+       // let nvc4:UINavigationController = UINavigationController(rootViewController: vc4)
+        //let nvc5:UINavigationController = UINavigationController(rootViewController:vc5)
+        
+        let tabbar1 = UITabBarItem(title: "首页", image: UIImage(named:"首页"), selectedImage:  UIImage(named:"首页"))
+        // tabbar1.imageInsets = UIEdgeInsetsMake(getHeight(25), width(25), getHeight(25), width(25))
+        let tabbar2 = UITabBarItem(title: "课程", image: UIImage(named:"课程表"), selectedImage:  UIImage(named:"课程表"))
+        let tabbar3 = UITabBarItem(title: "文件",image: UIImage(named:"文件"), selectedImage:  UIImage(named:"文件"))
+       // let tabbar4 = UITabBarItem(title: "我的", image: UIImage(named:"bottom4"), selectedImage:  UIImage(named:"bottom4"))
+        nvc1.tabBarItem = tabbar1;
+        nvc2.tabBarItem = tabbar2;
+        nvc3.tabBarItem = tabbar3;
+        //nvc4.tabBarItem = tabbar4;
+        let tc = UITabBarController()
+        tc.tabBar.tintColor = naviColor
+        tc.viewControllers = [nvc1,nvc2,nvc3]
+        // tc.tabBar.backgroundImage = Public.getImgView("3.png")tc.viewControllers = [nvc1,nvc2,nvc3,nvc4,nvc5];return tc;
+        return tc
+    }
+    
   
 
 
