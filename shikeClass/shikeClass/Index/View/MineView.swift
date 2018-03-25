@@ -55,7 +55,7 @@ class MineView{
     
     lazy var NumLabel:UILabel = {
         let label = UILabel(frame:Rect(145,265,0,0))
-        label.text = "199*******33"
+        label.text = "           "
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: getHeight(26))
         label.sizeToFit()
@@ -161,7 +161,8 @@ class MineView{
         //button.setImage(#imageLiteral(resourceName: "bottom_icon5"), for: .normal)
         let image = UIImageView()
         image.frame = Rect(40, 20, 50, 50)
-        image.image = #imageLiteral(resourceName: "排行榜");
+        image.image = #imageLiteral(resourceName: "set").withRenderingMode(.automatic);
+        //image.tintColor = naviColor
         button.addSubview(image)
         let line = UIView()
         let line1 = UIView()

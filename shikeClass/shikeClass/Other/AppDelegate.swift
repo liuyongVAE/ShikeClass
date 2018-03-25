@@ -57,8 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         
+
+        
         if self.didUserPressLockButton() {
             //User pressed lock button
+            
+            
             print("Lock screen.")
         }
         else {
@@ -99,6 +103,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         UIScreen.main.brightness = oldBrightness;
         return oldBrightness != newBrightness;
+        
+        
+    }
+    
+    
+    func  sendMessageOfLeave(){
+        //创建NSURL对象
+        let url:URL! = URL(string: "https://www.baidu.com")
+        //创建请求对象
+        let urlRequest:NSURLRequest = NSURLRequest.init(url: url)
+        //响应对象
+        var response:URLResponse?
+        
+        do{
+            //发送请求
+            let data:NSData? = try NSURLConnection.sendSynchronousRequest(urlRequest as URLRequest,
+                                                                          returning: &response) as NSData as NSData
+            let str = NSString(data: data! as Data, encoding: String.Encoding.utf8.rawValue)
+            print(str)
+            
+        }catch let error as NSError{
+            //打印错误消息
+            print(error.code)
+            print(error.description)
+        }
         
         
     }

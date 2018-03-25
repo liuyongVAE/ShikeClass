@@ -14,38 +14,44 @@ import SVProgressHUD
 class IndexViewController: UIViewController,CLLocationManagerDelegate{
     
     //Model
-    fileprivate var characterInfo:[String:String] = [
+    var characterInfo:[String:String] = [
         "character":"",
         "userLabel":"",
         "userNum":"",
         "isLogin":"",
         "isEmpty":""
     ]
-    fileprivate var dataSource:IndexModel! = IndexModel.init()
+    var dataSource:IndexModel!
     //View
-    fileprivate let Mview = MineView()
-    fileprivate let viewLeft = UIView();
-    fileprivate let viewReturn = UIView();
-    fileprivate var offsetX:CGFloat = 0
-    fileprivate let locationManager:CLLocationManager = CLLocationManager()
-    fileprivate let tableview:UITableView = UITableView()
+    let Mview = MineView()
+    let viewLeft = UIView();
+    let viewReturn = UIView();
+    var offsetX:CGFloat = 0
+    let locationManager:CLLocationManager = CLLocationManager()
+    let tableview:UITableView = UITableView()
  
     
     override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        dataSource = IndexModel.init()
         readInfo()
         request()
         self.setMineUI()
         self.setUI()
         self.setTV()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+       // self.dataSource.dataSource.removeAll()
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+
        
         getLocation()
-        UIScreen.main.brightness = 1
-        print(UIScreen.main.brightness)
+       // UIScreen.main.brightness = 1
+       // print(UIScreen.main.brightness)
         // Do any additional setup after loading the view.
     }
     
@@ -69,6 +75,10 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
             self.characterInfo["userNum"]! = ss
             self.characterInfo["isLogin"] = "1"
         }else{
+            self.characterInfo["userLabel"]! = "登录"
+            self.Mview.topBackview.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(touchLogin))
+            Mview.topBackview.addGestureRecognizer(tap)
             //self.isLogin = false;
             
         }
@@ -79,37 +89,7 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
     }
     
     
-    
-    fileprivate func  setUI(){
-      
-        
-        self.navigationItem.title = "时课"
-        self.navigationController?.navigationBar.titleTextAttributes =
-            [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = naviColor
-        
-        // 添加个人中心按钮
-        let item = UIBarButtonItem(image:#imageLiteral(resourceName: "bottom_icon5"),style:.plain,target:self,action:#selector(touchMine))
-        item.tintColor = UIColor.white
-        self.navigationItem.leftBarButtonItem = item
-        
-        //个人中心选单
-        
-        self.viewReturn.addSubview(Mview.topBackview)
-        self.viewReturn.addSubview(Mview.bottomView)
-        print(characterInfo)
-        Mview.NameLabel.text = self.characterInfo["userLabel"];
-        Mview.NameLabel.sizeToFit()
-        if characterInfo["character"] == "stu"{
-        Mview.NumLabel.text = self.characterInfo["userNum"];
-        }
    
-        
-        
-        
-        
-    }
     
     //MARK: -  定位相关
     
@@ -178,39 +158,7 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
         // Dispose of any resources that can be recreated.
     }
     
- 
-    @objc func didTouchSign(btn:UIButton){
-        
-        let alertController = UIAlertController(title:"提示",message:"请输入签到码",preferredStyle:.alert)
-    
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        alertController.addTextField(configurationHandler: ({
-            (text:UITextField) in
-                text.keyboardType = .numberPad
-                text.placeholder = "签到码"
-        }))
-        
-        let okAction = UIAlertAction(title:"确认",style:.default,handler:{
-            action in
-               let login = alertController.textFields?.first!
-               print(login?.text)
-        })
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        
 
-        self.present(alertController, animated: true, completion: nil)
-        
-    }
-    //MARK: - 转换时间
-    func timeFormat(_ tt:Int)->String{
-        let date  =  Date.init(timeIntervalSince1970: TimeInterval(tt/1000))
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
-        return formatter.string(from: date)
-        
-    }
-    
     
     
     // MARK: - 网络请求
@@ -303,7 +251,7 @@ extension IndexViewController:UITableViewDelegate,UITableViewDataSource{
 
     
     func setTV(){
-        self.tableview.frame = self.view.frame
+        self.tableview.frame = FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
         self.tableview.dataSource = self
         self.tableview.delegate = self
         self.view.addSubview(tableview)
@@ -376,107 +324,7 @@ extension IndexViewController:UITableViewDelegate,UITableViewDataSource{
 
 
 
-//MARK: - 点击个人中心
-extension IndexViewController{
-    
 
-    @objc func  touchMine(){
-        // self.tableview.removeFromSuperview()
-        UIView.animate(withDuration: 0.5, animations: {()-> Void in
-            
-            self.viewLeft.frame.origin.x = 0
-            
-        })
-        
-    }
-    
-    @objc func touchReturn(){
-        
-        //print("-----")
-        UIView.animate(withDuration: 0.5, animations: {()-> Void in
-            
-            self.viewLeft.frame.origin.x = -SCREEN_WIDTH
-            
-        })
-        
-    }
-    
-    
 
-    @objc func viewSwip(sender: UISwipeGestureRecognizer){
-        if sender.direction == UISwipeGestureRecognizerDirection.left{
-            touchReturn()
-        }
-        
-    }
-    
-    
-    
-    func setMineUI(){
-        
-        //self.edgesForExtendedLayout = UIRectEdge(rawValue: UIRectEdge.RawValue(0))
-        viewLeft.frame = CGRect(x:-SCREEN_WIDTH,y:0,width:SCREEN_WIDTH,height:SCREEN_HEIGHT)
-        viewLeft.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-        
-        UIApplication.shared.windows.last?.addSubview(viewLeft)
-        viewLeft.isUserInteractionEnabled = true
-        
-        let btn = UIButton(frame:  CGRect(x:2*SCREEN_WIDTH/3,y:0,width:2*SCREEN_WIDTH/3,height:SCREEN_HEIGHT))
-        viewLeft.addSubview(btn)
-        
-        btn.addTarget(self, action: #selector(touchReturn), for: .touchUpInside)
-        let gesture = UISwipeGestureRecognizer()
-        gesture.direction = .left
-        gesture.addTarget(self, action: #selector(viewSwip(sender:)))
-        viewLeft.isUserInteractionEnabled = true
-         viewLeft.addGestureRecognizer(gesture)
-        // let tap = UITapGestureRecognizer()
-        // tap.addTarget(self, action: #selector(touchReturn))
-        // tap.numberOfTapsRequired = 1
-        //viewLeft.addGestureRecognizer(tap)
-        //        viewReturn.isUserInteractionEnabled = true
-        //        viewReturn.addGestureRecognizer(tap)
-        
-        viewReturn.frame = CGRect(x:0,y:0,width:2*SCREEN_WIDTH/3,height:SCREEN_HEIGHT)
-        viewReturn.backgroundColor = naviColor
-        viewLeft.addSubview(viewReturn)
-        
-        //设置点击事件
-        self.Mview.classBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
-        self.Mview.fileBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
-        self.Mview.signBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
-        self.Mview.settingBtn.addTarget(self, action: #selector(leftTouchFunc(btn:)), for: .touchUpInside)
-        
-    }
-    
-    //左侧按钮点击事件
-    @objc func leftTouchFunc(btn:UIButton){
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
-        switch btn.tag {
-        case 0:
-            let layout = UICollectionViewFlowLayout()
-            self.navigationController?.pushViewController(LessonCollectionViewController(collectionViewLayout:layout), animated: true)
-            print("lessonSheet")
-        case 1:
-            self.navigationController?.pushViewController(MyFileTableViewController(), animated: true)
-        case 2:
-            print("mySign")
-        case 3:
-            print("setting")
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
-            
-        default:
-            return
-        }
-        
-    }
-    
-    
-    
-
-    
-    
-}
 
 

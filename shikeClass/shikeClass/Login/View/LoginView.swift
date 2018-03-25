@@ -47,6 +47,20 @@ class LoginView: UIView {
     }()
     
     
+    lazy var  NewPassword:UITextField = {
+        let text = UITextField(frame:CGRect(x:getWidth(90),y:getHeight(530 - 40 + 110),width:getWidth(555),height:getHeight(86)))
+        text.font = UIFont.systemFont(ofSize: getHeight(32))
+        //text.isSecureTextEntry = true
+        text.placeholder = "   确认密码"
+        text.layer.borderWidth = 1
+        text.layer.borderColor = title2color.cgColor
+        text.backgroundColor = UIColor.white
+        text.layer.cornerRadius = 2
+        
+        return text
+        
+    }()
+    
     lazy var segment:UISegmentedControl={
         let seg = UISegmentedControl.init(frame:CGRect(x:getWidth(90),y:getHeight(640),width:getWidth(555),height:getHeight(56)))
         seg.tintColor = title2color
@@ -84,6 +98,7 @@ class LoginView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.userNum.resignFirstResponder()
         self.userLabel.resignFirstResponder()
+        self.NewPassword.resignFirstResponder()
     }
     
     

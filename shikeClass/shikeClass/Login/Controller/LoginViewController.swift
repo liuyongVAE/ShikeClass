@@ -42,17 +42,30 @@ class LoginViewController: UIViewController {
         userDefault.set(Character, forKey: "character")
         userDefault.set(name, forKey: "userLabel")
         userDefault.set(psw, forKey: "userNum")
+        
+        print(userDefault.string(forKey: "userNum"))
     }
     
     
     
    @objc func Alarequest(){
-        let url = rootURL + "/shikeya/api/student_login"
-        let id = self.loginView.userNum.text!
-        let pas = self.loginView.userLabel.text!
+    
+    var url = rootURL + "/shikeya/api/student_login";
+    let id = self.loginView.userNum.text!;
+    let pas = self.loginView.userLabel.text!;
+        var paramete = ["student_id":"\(id)","student_name":"\(pas)"]
+
+        if (self.loginView.segment.selectedSegmentIndex==1){
+           url = rootURL + "/shikeya/api/teacher_login"
+           paramete = ["teacher_id":"\(id)","password":"\(pas)"]
+
+         }
+
+    
+
         
         
-        let paramete = ["student_id":"\(id)","student_name":"\(pas)"]
+       // let paramete = ["student_id":"\(id)","student_name":"\(pas)"]
        // print(paramete,url)
 
         Alamofire.request(url, method: .post,parameters:paramete).responseJSON(completionHandler: {
@@ -73,7 +86,8 @@ class LoginViewController: UIViewController {
                         self.saveInfo("stu",pas,id);}else{
                         self.saveInfo("tea",pas,id)
                     }
-                    self.navigationController?.popViewController(animated: true)
+                    //self.navigationController?.view.viewDidLoad()
+                    self.navigationController?.popToRootViewController(animated: true)
                     //self.navigationController?.pushViewController(IndexViewController(), animated: true)//present(UINavigationController.init(rootViewController: IndexViewController()), animated: true, completion: nil)
 
                 }else{

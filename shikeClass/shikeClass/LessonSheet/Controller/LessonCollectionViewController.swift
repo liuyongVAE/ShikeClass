@@ -136,7 +136,7 @@ class LessonCollectionViewController: UICollectionViewController {
         }
         
         //测试当日
-        topButtons[3].isSelected = true
+        //topButtons[3].isSelected = true
         
         
     
@@ -205,8 +205,10 @@ extension LessonCollectionViewController{
     func request(){
         
         let url = rootURL + "/shikeya/api/lesson_search_all"
-        let id = "1525122009"
-        
+        var id = ""
+        if let idd = UserDefaults.standard.string(forKey: "userNum"){
+            id = idd;
+        }
         let paramete = ["student_id":"\(id)"]
         var new:LessonSheetModel!
         AlaRequestManager.shared.postRequest(urlString: url, params: paramete as [String : AnyObject], success:{
@@ -256,6 +258,7 @@ extension LessonCollectionViewController{
                 }
                 
                     self.lessonSheetData = new
+                self.topButtons[Int(self.lessonSheetData.todayWeek!)!].isSelected = true
                     self.collectionView?.reloadData()
                     print(new)
                 
