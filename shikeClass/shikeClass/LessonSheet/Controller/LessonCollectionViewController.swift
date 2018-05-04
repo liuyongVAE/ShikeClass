@@ -40,9 +40,16 @@ class LessonCollectionViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+//        for i in 0...34 {
+//          self.collectionView?.cellForItem(at: IndexPath.init(row: i, section: 1))?.backgroundColor = UIColor.clear
+//        }
+        request()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        request()
+       // request()
         setUI()
         self.collectionView?.backgroundColor = backColor
         self.collectionView?.frame = UIScreen.main.bounds
@@ -50,7 +57,7 @@ class LessonCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(SheetTableViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
 
         // Do any additional setup after loading the view.
@@ -137,6 +144,8 @@ class LessonCollectionViewController: UICollectionViewController {
             topView.addSubview(i)
         }
         
+        
+        //getNowWeek()
         //测试当日
         //topButtons[3].isSelected = true
         
@@ -170,26 +179,22 @@ class LessonCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SheetTableViewCell
         
       //填写课程名
-        let label = UILabel()
-        label.frame = cell.contentView.frame
 
-        label.text = ""
-        cell.backgroundColor = UIColor.clear
         if (self.lessonSheetData.lessonPosition?.contains(indexPath.row))! {
-            print(indexPath.row)
-            label.text = lessonSheetData.lessonName?[(lessonSheetData.lessonPosition?.index(of: indexPath.row))!];
+          //  print(indexPath.row)
+            cell.label.text = lessonSheetData.lessonName?[(lessonSheetData.lessonPosition?.index(of: indexPath.row))!];
             // lessonSheetData.lessonName?.removeFirst()
+            cell.label.adjustsFontSizeToFitWidth = true
+
             cell.backgroundColor = UIColor.randomColor
+        }else{
+            cell.backgroundColor = UIColor.clear
+
         }
-        label.font = UIFont.systemFont(ofSize: getHeight(26))
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
-        //label.sizeToFit()
-        label.textColor = UIColor.white
-        cell.addSubview(label)
+
 
         // Configure the cell
     
@@ -206,13 +211,33 @@ class LessonCollectionViewController: UICollectionViewController {
 extension LessonCollectionViewController{
     func request(){
         
+        
+        var new:LessonSheetModel!
+//        new.length = 0
+//        new.lessonAdress?.removeAll()
+//        new.lessonName?.removeAll()
+//        new.lessonId?.removeAll()
+//        new.lessonWeek?.removeAll()
+//
+        
+        
         let url = rootURL + "/shikeya/api/lesson_search_all"
         var id = ""
         if let idd = UserDefaults.standard.string(forKey: "userNum"){
             id = idd;
         }
-        let paramete = ["student_id":"\(id)"]
-        var new:LessonSheetModel!
+        let paramete:[String:String] = {
+            if let cc = UserDefaults.standard.string(forKey: "character"){
+                if cc == "stu"{
+                    return ["student_id":"\(id)"]
+                }else if cc == "tea"{
+                let name = UserDefaults.standard.string(forKey: "teacher_name")!
+                return ["teacher_name":"\(name)"]
+            }
+            }
+            return [:]
+           }()
+        
         AlaRequestManager.shared.postRequest(urlString: url, params: paramete as [String : AnyObject], success:{
             (js:JSON)-> () in
             
@@ -220,18 +245,16 @@ extension LessonCollectionViewController{
                 let cc = js["data"].count
                 new = LessonSheetModel()
                 new.length = cc;
-                new.todayWeek = "1"
-            
-                
-                print(js)
+                new.todayWeek = "\(self.getNowWeek())"
+              //  print(js)
                 if cc>0{
                     for i in 0...cc{
                         if let sna = js["data"][i]["lesson_id"].string{
                             new.lessonId?.append(sna)
-                            var time1 = String(sna[sna.startIndex])
+                            let time1 = String(sna[sna.startIndex])
                             var time = String(sna[sna.startIndex])
                             new.lessonWeek?.append(Int(time1)!)
-                            let index = sna.index(sna.startIndex, offsetBy: 1)
+                            _ = sna.index(sna.startIndex, offsetBy: 1)
                             var index2 = sna.index(sna.startIndex, offsetBy: 2)
                             time = String(sna[index2])
                             //计算行列
@@ -260,9 +283,9 @@ extension LessonCollectionViewController{
                 }
                 
                     self.lessonSheetData = new
-                self.topButtons[Int(self.lessonSheetData.todayWeek!)!].isSelected = true
+                    self.topButtons[Int(self.lessonSheetData.todayWeek!)!].isSelected = true
+                    //print(self.lessonSheetData.lessonPosition)
                     self.collectionView?.reloadData()
-                    print(new)
                 
             }
             
@@ -286,10 +309,40 @@ extension LessonCollectionViewController{
         }
         return  (rownew-1)*7 + col - 1
     }
+    
+    
+    func getNowWeek()->Int{
+        let now = Date()
+        let df = DateFormatter()
+        df.dateFormat = "EEEE"
+        let week = (df.string(from: now))
+        switch week {
+        case "Monday":
+            return 1;
+        case "Tuesday":
+            return 2;
+        case "Wednesday":
+            return 3;
+        case "Thursday":
+            return 4;
+        case "Friday":
+            return 5;
+        case "Staturday":
+            return 6;
+        case "Sunday":
+            return 7;
+        default:
+            return 1;
+        }
+        
+        
+    }
 
-    
-    
 }
+
+
+
+
 
 
 

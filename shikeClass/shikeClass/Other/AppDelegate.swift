@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // window?.rootViewController = IndexViewController()
       // self.window?.rootViewController = vc
         let vc  = IndexViewController()
-        self.window?.rootViewController = CusTomTabBar() //UINavigationController(rootViewController:self.CusTomTabBar())
+        self.window?.rootViewController = MyTabViewController() //UINavigationController(rootViewController:self.CusTomTabBar())
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = UIColor.white
         // Override point for customization after application launch.
@@ -66,6 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Lock screen.")
         }
         else {
+            
+            self.sendMessageOfLeave(status: "2")
             print("Home.")
             //user pressed home button
         }
@@ -76,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        sendMessageOfLeave(status: "1")
         print("重新唤醒")
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
@@ -86,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        sendMessageOfLeave(status: "2")
         print("应用杀死")
     }
     
@@ -108,11 +112,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func  sendMessageOfLeave(){
+    
+    
+    
+    func testLessonStatus()->Bool{
+        
+        let now = Date()
+        // 创建一个日期格式器
+        
+        let m = UserDefaults.standard
+        if let ss = m.string(forKey: "signTime"){
+            //let interval = TimeInterval.init(Int(ss)!)
+            //let m = Date.init(timeIntervalSinceNow: interval);
+            //print(interval)
+            //print(m)
+            
+        }
+        
+        
+        return true
+    }
+    
+    
+    
+    
+    
+    
+    func  sendMessageOfLeave(status:String){
+        //判断当前是否为下课时间 用当前时间 - 签到时间
+       testLessonStatus()
         //创建NSURL对象
-        let url:URL! = URL(string: "https://www.baidu.com")
+        //改变学生的签到状态‘
+        
+        let params:[String:String] = {
+            let m = UserDefaults.standard
+            if let ss = m.string(forKey: "nowLesson"){
+                return ["student_id":m.string(forKey: "userNum")!,"lesson_id":"\(ss)","exist":status]
+            }else{
+                return ["student_id":""]
+            }
+        }()
+        
+        let list = NSMutableArray()
+        for i in params{
+            let temstr = i.key+"="+i.value
+            list.add(temstr)
+        }
+        let paramStr = list.componentsJoined(by: "&")
+        
+        let paraData = paramStr.data(using: .utf8)
+
+        let urlString =  rootURL + "/shikeya/api/changeStatus"
+        
+        
+        let url:URL! = URL(string: urlString)
         //创建请求对象
-        let urlRequest:NSURLRequest = NSURLRequest.init(url: url)
+        var urlRequest:URLRequest = URLRequest.init(url: url)
+        urlRequest.httpBody = paraData
+        urlRequest.httpMethod = "POST"
+        print(urlRequest)
         //响应对象
         var response:URLResponse?
         
@@ -133,38 +191,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func CusTomTabBar() ->UITabBarController{
-        let vc1 = IndexViewController()
-        let vc2 = LessonCollectionViewController.init(collectionViewLayout: UICollectionViewFlowLayout.init())
-        let vc3 = MyFileTableViewController()
-        // let vc5 = IndexViewController()
-        
-        
-        let nvc1:UINavigationController = UINavigationController(rootViewController: vc1)
-        let nvc2:UINavigationController = UINavigationController(rootViewController: vc2)
-        let nvc3:UINavigationController = UINavigationController(rootViewController: vc3)
-        
-       // nvc2.navigationItem.title = "课程表"
-       // nvc3.navigationItem.title = "文件"
-        
-       // let nvc4:UINavigationController = UINavigationController(rootViewController: vc4)
-        //let nvc5:UINavigationController = UINavigationController(rootViewController:vc5)
-        
-        let tabbar1 = UITabBarItem(title: "首页", image: UIImage(named:"首页"), selectedImage:  UIImage(named:"首页"))
-        // tabbar1.imageInsets = UIEdgeInsetsMake(getHeight(25), width(25), getHeight(25), width(25))
-        let tabbar2 = UITabBarItem(title: "课程", image: UIImage(named:"课程表"), selectedImage:  UIImage(named:"课程表"))
-        let tabbar3 = UITabBarItem(title: "文件",image: UIImage(named:"文件"), selectedImage:  UIImage(named:"文件"))
-       // let tabbar4 = UITabBarItem(title: "我的", image: UIImage(named:"bottom4"), selectedImage:  UIImage(named:"bottom4"))
-        nvc1.tabBarItem = tabbar1;
-        nvc2.tabBarItem = tabbar2;
-        nvc3.tabBarItem = tabbar3;
-        //nvc4.tabBarItem = tabbar4;
-        let tc = UITabBarController()
-        tc.tabBar.tintColor = naviColor
-        tc.viewControllers = [nvc1,nvc2,nvc3]
-        // tc.tabBar.backgroundImage = Public.getImgView("3.png")tc.viewControllers = [nvc1,nvc2,nvc3,nvc4,nvc5];return tc;
-        return tc
-    }
+
     
   
 

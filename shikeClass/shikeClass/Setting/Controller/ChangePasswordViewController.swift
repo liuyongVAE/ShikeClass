@@ -48,7 +48,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
 
-    if let ss = usd.string(forKey: "charater"){
+    if let ss = usd.string(forKey: "character"){
         if ss == "stu"{
             let al = UIAlertController.init(title: "提示", message: "学生身份暂不支持修改！", preferredStyle: .alert)
             al.addAction(UIAlertAction.init(title: "确认", style: .cancel, handler: nil))
@@ -68,19 +68,20 @@ class ChangePasswordViewController: UIViewController {
                 return
             }else{
                 //正确流程
-                let id = usd.string(forKey: "userNum")
+                let id = usd.string(forKey: "userNum")!
                 let url = rootURL + "/shikeya/api/teacher_password"
                 let params = ["teacher_id":"\(id)","password":"\(newText2)"]
                 
                 AlaRequestManager.shared.postRequest(urlString: url, params: params as [String : AnyObject], success:({js in
+                    print(js)
                     if js["status"].string! == "200"{
-                        
                         SVProgressHUD.showSuccess(withStatus: "修改成功")
                         SVProgressHUD.dismiss(withDelay: 1.5)
                         usd.set(newText2, forKey: "userLabel")
+                        self.navigationController?.popToRootViewController(animated: true)
                     }else{
                         
-                        SVProgressHUD.showSuccess(withStatus: "修改失败，请稍后再试")
+                        SVProgressHUD.showInfo(withStatus: "修改失败，请稍后再试")
                         SVProgressHUD.dismiss(withDelay: 1.5)
                         
                     }

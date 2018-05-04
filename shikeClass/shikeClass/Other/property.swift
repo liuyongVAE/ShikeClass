@@ -74,6 +74,8 @@ let title2color = hexStringToColor(hexString: "#7a7a7a")
 let backColor = hexStringToColor(hexString:"#fafafa")
 let lineColor = hexStringToColor(hexString:"#dddddd")
 let title1Color = hexStringToColor(hexString:"#333333")
+let SignedColor = UIColor.init(red: 82/255, green: 173/225, blue: 57/255, alpha: 1)
+let SignYellow = UIColor.init(red: 251/255, green: 204/225, blue: 51/255, alpha: 1)
 let rootURL = "http://112.74.41.60"
 
 

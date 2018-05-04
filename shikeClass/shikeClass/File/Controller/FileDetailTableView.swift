@@ -7,16 +7,30 @@
 // FileDetailTableView b
 import UIKit
 class FileDetailTableView: UITableViewController {
-    var database:[String:[String]] = ["Filename":[],"FileTag":[],"numofFile":[]]
+var database:[String:[String]] = ["Filename":[],"FileTag":[],"numofFile":[],"FileLink":[],"File":[]]
+    var class_id:String!
+    
+    
+    init(class_id:String){
+        self.class_id = class_id
+        super.init(style: .plain)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    convenience init(){
+        self.init(class_id: "")
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         netRequest()
         self.navigationItem.title = "我的文件"
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,18 +75,45 @@ class FileDetailTableView: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          self.navigationController?.pushViewController(MyViewController(), animated: true)
+          self.navigationController?.pushViewController(MyViewController.init(link: self.database["FileLink"]![indexPath.row]), animated: true)
     }
     
     func netRequest(){
-        for  _ in 0...5{
-            database["Filename"]?.append("高等数学")
-            database["numofFile"]?.append("64KB")
-        }
-        print(database)
-        self.tableView.reloadData()
+        
+        
+        var new = self.database
+        let url = rootURL + "/shikeya/api/file_search_condition"
+        let params:[String:String] = {
+            if let mm = UserDefaults.standard.string(forKey: "userNum"){
+                return ["studentid":mm,"lessonid":self.class_id]
+            }else{
+                
+                return [:]
+            }
+        }()
+        
+        AlaRequestManager.shared.postRequest(urlString: url, params: params as [String:AnyObject], success:({
+            js in
+            print(js)
+            for i in 0..<js["data"].count{
+                new["Filename"]?.append(js["data"][i]["file_name"].string!)
+                new["numofFile"]?.append(js["data"][i]["file_size"].string! +  "KB")
+                //new["FileTag"]?.append(js["data"][i]["file_id"].string!)
+                new["FileLink"]?.append(js["data"][i]["file_link"].string!)
+            }
+            self.database = new
+            //            print(new)
+            self.tableView.reloadData()
+            
+        }), failture: ({
+            
+            error in print(error)
+            
+        }))
+        
         
     }
+
     
     
     /*

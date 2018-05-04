@@ -9,7 +9,7 @@
 import UIKit
 
 class MyFileTableViewController: UITableViewController {
-    var database:[String:[String]] = ["Filename":[],"FileTag":[],"numofFile":[]]
+    var database:[String:[String]] = ["Filename":[],"FileTag":[],"numofFile":[],"FileLink":[],"File":[]]
     override func viewDidLoad() {
         super.viewDidLoad()
         netRequest()
@@ -54,7 +54,7 @@ class MyFileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        let cell = MyFileTableViewCell.init(style: .default, reuseIdentifier: "cell")
+        let cell = FileDetailTableViewCell.init(style: .default, reuseIdentifier: "cell")
         if let data = database["Filename"]?[indexPath.row]{
             cell.TitleLabel.text = data
             cell.TitleLabel.sizeToFit()
@@ -68,6 +68,8 @@ class MyFileTableViewController: UITableViewController {
     
     func netRequest(){
      
+        
+        var new = self.database
         let url = rootURL + "/shikeya/api/file_search_sid"
         let params:[String:String] = {
             if let mm = UserDefaults.standard.string(forKey: "userNum"){
@@ -81,7 +83,22 @@ class MyFileTableViewController: UITableViewController {
         AlaRequestManager.shared.postRequest(urlString: url, params: params as [String:AnyObject], success:({
             js in
             print(js)
-        
+            for i in 0..<js["data"].count{
+                new["Filename"]?.append(js["data"][i]["file_name"].string!)
+                new["numofFile"]?.append(String(js["data"][i]["file_size"].int!) + "KB")
+                //new["FileTag"]?.append(js["data"][i]["file_id"].string!)
+                //new["FileLink"]?.append(js["data"][i]["file_link"].string!)
+                let sts = "https://liuyongvae.github.io/liuyongvae.github.io/%E5%88%98%E5%8B%87-iOS%E5%BC%80%E5%8F%91%E5%AE%9E%E4%B9%A0%E7%94%9F-%E5%8D%8E%E4%BE%A8%E5%A4%A7%E5%AD%A6.pdf"
+               new["FileLink"]?.append(sts)
+                
+                
+                
+                
+            }
+            self.database = new
+//            print(new)
+            self.tableView.reloadData()
+
         }), failture: ({
             
             error in print(error)
@@ -90,17 +107,15 @@ class MyFileTableViewController: UITableViewController {
         
         
         
-        
-        
-        
-        
-        print(database)
-        self.tableView.reloadData()
+      
         
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(FileDetailTableView(), animated: true)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        
+        self.navigationController?.pushViewController(MyViewController.init(link: self.database["FileLink"]![indexPath.row]), animated: true)
     }
 
     /*

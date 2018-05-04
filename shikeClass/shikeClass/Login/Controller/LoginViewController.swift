@@ -56,9 +56,9 @@ class LoginViewController: UIViewController {
     @objc func touchMore(){
         
         
-        let al = UIAlertController.init(title: "账号检测说明", message: "时课尚处于内测状态，未开放注册，点击使用测试账号登录即可体验全部功能！", preferredStyle: .alert)
+        let al = UIAlertController.init(title: "账号检测说明", message: "时课无需注册，只需要提供您的学号姓名或工号密码即可登录！", preferredStyle: .alert)
         al.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-        al.addAction(UIAlertAction.init(title: "使用测试账号登录", style: .default, handler: ({
+        al.addAction(UIAlertAction.init(title: "使用游客账号登录", style: .default, handler: ({
             action in
             
             self.loginView.userNum.text =  "1525122009"
@@ -109,14 +109,16 @@ class LoginViewController: UIViewController {
                     if (self.loginView.segment.selectedSegmentIndex==0){
                         self.saveInfo("stu",pas,id);}else{
                         if let name = json["data"]["teacher"]["teacher_name"].string{
-                            self.saveInfo("tea",name,id)
-                        }else{
-                            self.saveInfo("tea",id,id)
+                            self.saveInfo("tea",pas,id)
+                            let usd = UserDefaults.standard
+                            usd.set(name, forKey: "teacher_name")
                         }
                         
                     }
                    
-                    self.navigationController?.pushViewController(IndexViewController(), animated: true)
+                    //let vc = UINavigationController.init(rootViewController: IndexViewController())
+                    self.present(MyTabViewController(), animated: true, completion:  nil)
+                    //self.navigationController?.pushViewController(IndexViewController(), animated: true)
                     //self.navigationController?.view.viewDidLoad()
                    // let vc = UINavigationController.init(rootViewController: IndexViewController())
                   //self.navigationController?.popToRootViewController(animated: true)

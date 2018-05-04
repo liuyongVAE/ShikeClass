@@ -13,7 +13,27 @@ import SVProgressHUD
 //签到操作
 extension IndexViewController{
     
+    
+    func saveDateNow(){
+        
+        let now = Date()
+        // 创建一个日期格式器
+        let nn = String(now.timeIntervalSince1970)
+        UserDefaults.standard.set(nn, forKey: "signTime")
+        
+        
+    }
+    
+    
+    
     @objc func didTouchSign(btn:UIButton){
+        
+//        if !btn.isSelected{
+//            btn.isEnabled = false
+//        }else{
+//            return
+//        }
+        
         
         let tag = btn.tag
         if self.characterInfo["character"] == "stu"{
@@ -23,7 +43,7 @@ extension IndexViewController{
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alertController.addTextField(configurationHandler: ({
             (text:UITextField) in
-            text.keyboardType = .numberPad
+            //text.keyboardType = .numberPad
             text.placeholder = "签到码"
         }))
         
@@ -43,7 +63,7 @@ extension IndexViewController{
             let params:[String:String] = {
                 if let tt  = login?.text{
                     
-                    return ["student_id":self.characterInfo["userNum"]!,"lesson_id":"\(self.dataSource.dataSource["id"]![tag])","code":tt]
+                    return ["student_id":self.characterInfo["userNum"]!,"lesson_id":"\(self.dataSource.dataSource["id"]![tag])","code":tt,"isStudent":"0"]
                 }else{
              
                     return [:]
@@ -57,9 +77,14 @@ extension IndexViewController{
                 print(js)
 
                 if js["status"].string! == "200"{
-                    SVProgressHUD.showSuccess(withStatus: "签到成功 ")
-                    self.setSigned(tag: tag)
+                    SVProgressHUD.showSuccess(withStatus: js["data"].string!)
+                    //self.setSigned(tag: tag)
+                    self.request()
+                    //修改本地存储当前正在上的课程
 
+                    let userDefault = UserDefaults.standard
+                    userDefault.set(self.dataSource.dataSource["id"]![tag], forKey: "nowLesson")
+                    self.saveDateNow()
                     
         
                 }else{
@@ -75,6 +100,9 @@ extension IndexViewController{
                 
             }), failture: ({
                 error  in
+                SVProgressHUD.showError(withStatus: "签到失败，请稍后后重试")
+                SVProgressHUD.dismiss(withDelay: 1.5)
+
                 print(error)
             }))
             
@@ -84,7 +112,7 @@ extension IndexViewController{
         self.present(alertController, animated: true, completion: nil)
         }else{
             
-            getSignCode()
+            getSignCode(tag:tag)
             
             
         }
@@ -99,9 +127,58 @@ extension IndexViewController{
         
     }
     
-    func getSignCode(){
+    func getSignCode(tag:Int){
         
-    }
+        let tt  = self.dataSource.dataSource["id"]![tag]
+
+        
+        let params:[String:String] = {
+                return ["lesson_id":tt]
+        }()
+        
+        let url = rootURL + "/shikeya/api/teacher_sign"
+        
+        AlaRequestManager.shared.postRequest(urlString: url, params: params as [String : AnyObject], success:({
+            js in
+            print(js)
+            
+            if js["status"].string! == "200"{
+                //SVProgressHUD.showSuccess(withStatus: "")
+                self.setSigned(tag: tag)
+                self.request()
+                if let ss = js["data"].string{
+                let alertController = UIAlertController(title:"签到码为",message:ss,preferredStyle:.alert)
+                    let okAction = UIAlertAction(title: "确定", style: .cancel, handler: {
+                            action in
+                        self.signCode = ss; self.navigationController?.pushViewController(MySIgnViewController.init(code: ss, lesson_id: tt), animated: true)
+                    })
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+            }
+                
+            }else{
+                
+                SVProgressHUD.showError(withStatus: js["data"].string!)
+                //self.present(alertController, animated: true, completion: nil)
+                
+                
+            }
+            
+            SVProgressHUD.dismiss(withDelay: 1.5)
+            
+        }), failture: ({
+            error  in
+            SVProgressHUD.showError(withStatus: "获取失败，请稍后后重试")
+            SVProgressHUD.dismiss(withDelay: 1.5)
+            
+            print(error)
+        }))
+        
+    //alertController.addAction(okAction)
+    //alertController.addAction(cancelAction)
+    //self.present(alertController, animated: true, completion: nil)
+}
+    
     
     func setSigned(tag:Int){
         
@@ -112,6 +189,14 @@ extension IndexViewController{
         cell.SignButton.setTitle("已签到", for: .normal)
         cell.SignButton.backgroundColor = UIColor.orange
     }
+    
+    
+   @objc func  touchFile(_ tag:UIButton){
+        self.navigationController?.pushViewController(FileDetailTableView.init(class_id: self.dataSource.dataSource["id"]![tag.tag]), animated: true)
+        
+    }
+    
+    
     
     
     

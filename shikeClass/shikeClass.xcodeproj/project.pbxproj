@@ -29,15 +29,26 @@
 		2D17F5B320674BFA00CC3C73 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17F5B220674BFA00CC3C73 /* Extension.swift */; };
 		2D17F5B52067559E00CC3C73 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17F5B42067559E00CC3C73 /* UIExtension.swift */; };
 		2D17F5B720675B3500CC3C73 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17F5B620675B3500CC3C73 /* MoreViewController.swift */; };
+		2D1835162068C3DE00272309 /* DropListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1835152068C3DD00272309 /* DropListView.swift */; };
+		2D1835182069244300272309 /* TeacherSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1835172069244300272309 /* TeacherSignView.swift */; };
 		2D49E4CD20678D78007DCC4A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D49E4CC20678D78007DCC4A /* Launch Screen.storyboard */; };
+		2D49E4CF20689951007DCC4A /* MySIgnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49E4CE20689951007DCC4A /* MySIgnViewController.swift */; };
+		2D49E4D520689FC8007DCC4A /* TeacherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49E4D420689FC8007DCC4A /* TeacherMode.swift */; };
+		2D49E4D720689FD8007DCC4A /* StudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49E4D620689FD8007DCC4A /* StudentModel.swift */; };
+		2D49E4D92068A04A007DCC4A /* StudentSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49E4D82068A04A007DCC4A /* StudentSignView.swift */; };
+		2D49E4DB2068A31A007DCC4A /* SignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D49E4DA2068A31A007DCC4A /* SignTableViewCell.swift */; };
 		2D60826620668FE00036C58A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60826520668FE00036C58A /* SettingViewController.swift */; };
 		2D608268206690000036C58A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D608267206690000036C58A /* SettingView.swift */; };
 		2D60826D20669FD80036C58A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60826B20669FD80036C58A /* AboutViewController.swift */; };
 		2D60826E20669FD80036C58A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D60826C20669FD80036C58A /* AboutViewController.xib */; };
 		2D6082702066A3D40036C58A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D60826F2066A3D40036C58A /* ChangePasswordViewController.swift */; };
+		2D761F792099751F00EE2543 /* SheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D761F782099751F00EE2543 /* SheetTableViewCell.swift */; };
+		2DB96A3E209C256D00BB734D /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB96A3D209C256D00BB734D /* MyTabViewController.swift */; };
+		2DC3AC9C2070B1EB004B29E2 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC3AC9B2070B1EB004B29E2 /* AlertView.swift */; };
 		2DED1AB22060FFAD001368A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DED1AB12060FFAD001368A0 /* LoginView.swift */; };
 		2DED1AB42060FFCB001368A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DED1AB32060FFCB001368A0 /* LoginViewController.swift */; };
 		2DED1AB620611388001368A0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DED1AB520611388001368A0 /* SwiftyJSON.swift */; };
+		2DED28A6207081E4006BA86C /* TableviewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DED28A5207081E4006BA86C /* TableviewExtension.swift */; };
 		E02744D14EF6482D3755BEFE /* Pods_shikeClass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,15 +98,26 @@
 		2D17F5B220674BFA00CC3C73 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		2D17F5B42067559E00CC3C73 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 		2D17F5B620675B3500CC3C73 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		2D1835152068C3DD00272309 /* DropListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropListView.swift; sourceTree = "<group>"; };
+		2D1835172069244300272309 /* TeacherSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignView.swift; sourceTree = "<group>"; };
 		2D49E4CC20678D78007DCC4A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		2D49E4CE20689951007DCC4A /* MySIgnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySIgnViewController.swift; sourceTree = "<group>"; };
+		2D49E4D420689FC8007DCC4A /* TeacherMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMode.swift; sourceTree = "<group>"; };
+		2D49E4D620689FD8007DCC4A /* StudentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentModel.swift; sourceTree = "<group>"; };
+		2D49E4D82068A04A007DCC4A /* StudentSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSignView.swift; sourceTree = "<group>"; };
+		2D49E4DA2068A31A007DCC4A /* SignTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTableViewCell.swift; sourceTree = "<group>"; };
 		2D60826520668FE00036C58A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2D608267206690000036C58A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		2D60826B20669FD80036C58A /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		2D60826C20669FD80036C58A /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		2D60826F2066A3D40036C58A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		2D761F782099751F00EE2543 /* SheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTableViewCell.swift; sourceTree = "<group>"; };
+		2DB96A3D209C256D00BB734D /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
+		2DC3AC9B2070B1EB004B29E2 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		2DED1AB12060FFAD001368A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2DED1AB32060FFCB001368A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2DED1AB520611388001368A0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		2DED28A5207081E4006BA86C /* TableviewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableviewExtension.swift; sourceTree = "<group>"; };
 		347AB151532B94E60410200E /* Pods-shikeClass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shikeClass.release.xcconfig"; path = "Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass.release.xcconfig"; sourceTree = "<group>"; };
 		C6D3D91FD02011E7712EAE8A /* Pods_shikeClass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shikeClass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB110E021098E205D1FDF9B1 /* Pods-shikeClass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shikeClass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shikeClass/Pods-shikeClass.debug.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +213,7 @@
 			children = (
 				08CE12AD1FA7522E00792844 /* Info.plist */,
 				08CE12A81FA7522E00792844 /* Assets.xcassets */,
+				2D49E4D02068995D007DCC4A /* MySign */,
 				2DED1AA92060FE82001368A0 /* Login */,
 				2DED1AA52060FDC9001368A0 /* Setting */,
 				084F19EA1FAE06F900BC1003 /* LessonSheet */,
@@ -246,6 +269,7 @@
 				08CE12A11FA7522E00792844 /* AppDelegate.swift */,
 				08CE12D51FA7591800792844 /* property.swift */,
 				2D49E4CC20678D78007DCC4A /* Launch Screen.storyboard */,
+				2DB96A3D209C256D00BB734D /* MyTabViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -267,6 +291,7 @@
 				2D17F5B220674BFA00CC3C73 /* Extension.swift */,
 				2D17F5B42067559E00CC3C73 /* UIExtension.swift */,
 				2D17F5B620675B3500CC3C73 /* MoreViewController.swift */,
+				2DED28A5207081E4006BA86C /* TableviewExtension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -291,6 +316,7 @@
 		2D0EE5232066358600138C49 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2D761F782099751F00EE2543 /* SheetTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +327,45 @@
 				084F19EB1FAE07D200BC1003 /* LessonCollectionViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2D49E4D02068995D007DCC4A /* MySign */ = {
+			isa = PBXGroup;
+			children = (
+				2D49E4D32068997B007DCC4A /* Model */,
+				2D49E4D220689978007DCC4A /* View */,
+				2D49E4D120689974007DCC4A /* Controller */,
+			);
+			path = MySign;
+			sourceTree = "<group>";
+		};
+		2D49E4D120689974007DCC4A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2D49E4CE20689951007DCC4A /* MySIgnViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2D49E4D220689978007DCC4A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2D1835152068C3DD00272309 /* DropListView.swift */,
+				2D49E4D82068A04A007DCC4A /* StudentSignView.swift */,
+				2D49E4DA2068A31A007DCC4A /* SignTableViewCell.swift */,
+				2D1835172069244300272309 /* TeacherSignView.swift */,
+				2DC3AC9B2070B1EB004B29E2 /* AlertView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2D49E4D32068997B007DCC4A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D49E4D420689FC8007DCC4A /* TeacherMode.swift */,
+				2D49E4D620689FD8007DCC4A /* StudentModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2DED1AA42060FC91001368A0 /* Model */ = {
@@ -593,22 +658,33 @@
 				08CE12E61FAC625200792844 /* MineView.swift in Sources */,
 				2DED1AB620611388001368A0 /* SwiftyJSON.swift in Sources */,
 				2D0EE5202065FC0400138C49 /* AlaRequestManager.swift in Sources */,
+				2D49E4DB2068A31A007DCC4A /* SignTableViewCell.swift in Sources */,
+				2DB96A3E209C256D00BB734D /* MyTabViewController.swift in Sources */,
 				2D60826620668FE00036C58A /* SettingViewController.swift in Sources */,
 				2D17F5B52067559E00CC3C73 /* UIExtension.swift in Sources */,
 				2D6082702066A3D40036C58A /* ChangePasswordViewController.swift in Sources */,
+				2D1835162068C3DE00272309 /* DropListView.swift in Sources */,
 				08E370FF1FC92B8B005FEE4D /* FileDetailTableView.swift in Sources */,
 				08CE12A21FA7522E00792844 /* AppDelegate.swift in Sources */,
 				08CE12DC1FA86B8500792844 /* IndexTableViewCell.swift in Sources */,
+				2D49E4D92068A04A007DCC4A /* StudentSignView.swift in Sources */,
+				2DC3AC9C2070B1EB004B29E2 /* AlertView.swift in Sources */,
 				2D0EE51E2065ED8100138C49 /* IndexMode.swift in Sources */,
 				2D608268206690000036C58A /* SettingView.swift in Sources */,
 				08E370FD1FC92B41005FEE4D /* FileDetailTableViewCell.swift in Sources */,
 				084F19EC1FAE07D200BC1003 /* LessonCollectionViewController.swift in Sources */,
 				2D0EE526206635AD00138C49 /* LessonSheetModel.swift in Sources */,
+				2DED28A6207081E4006BA86C /* TableviewExtension.swift in Sources */,
 				2D17F5B320674BFA00CC3C73 /* Extension.swift in Sources */,
+				2D49E4D520689FC8007DCC4A /* TeacherMode.swift in Sources */,
+				2D761F792099751F00EE2543 /* SheetTableViewCell.swift in Sources */,
 				085FE5E21FC6B2AF004828B9 /* MyFileTableViewCell.swift in Sources */,
+				2D49E4D720689FD8007DCC4A /* StudentModel.swift in Sources */,
+				2D49E4CF20689951007DCC4A /* MySIgnViewController.swift in Sources */,
 				08CE12D21FA753E800792844 /* IndexViewController.swift in Sources */,
 				2DED1AB22060FFAD001368A0 /* LoginView.swift in Sources */,
 				08E371011FC92FFC005FEE4D /* MyViewController.swift in Sources */,
+				2D1835182069244300272309 /* TeacherSignView.swift in Sources */,
 				2D17F5B720675B3500CC3C73 /* MoreViewController.swift in Sources */,
 				2D60826D20669FD80036C58A /* AboutViewController.swift in Sources */,
 				085FE5E01FC6B0F4004828B9 /* MyFileTableViewController.swift in Sources */,
@@ -763,13 +839,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9A68XXWLG6;
 				INFOPLIST_FILE = shikeClass/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-.shikeClass";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shikeClass.liuyong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos11.2;
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -782,13 +858,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9A68XXWLG6;
 				INFOPLIST_FILE = shikeClass/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-.shikeClass";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shikeClass.liuyong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos11.2;
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

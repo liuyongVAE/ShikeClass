@@ -13,9 +13,22 @@ import SVProgressHUD
 
 class IndexViewController: UIViewController,CLLocationManagerDelegate{
     
+    
+    
+    //测试位置Label、
+    lazy var locaLabel:UILabel = {
+        let label = UILabel.init(frame: FloatRect(0, 100, 300, 100))
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.orange
+        label.text = "location"
+        return label
+    }()
+    
+    
     //Model
     var characterInfo:[String:String]!
     var dataSource:IndexModel!
+    var signCode:String?
     //View
     let Mview = MineView()
     let viewLeft = UIView();
@@ -23,6 +36,21 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
     var offsetX:CGFloat = 0
     let locationManager:CLLocationManager = CLLocationManager()
     let tableview:UITableView = UITableView()
+   //今日无课
+    lazy var defaultView:UIView = {
+        let dd = UIView(frame:self.tableview.frame)
+        dd.backgroundColor = UIColor.white
+        let def = UIImageView.init(frame: FloatRect(SCREEN_WIDTH/10, 0, SCREEN_WIDTH*4/5, SCREEN_HEIGHT*4/5))
+        
+        let random = Int(arc4random()%3)+1
+        let str =  "今日无课"+"\(random)"
+        def.image = UIImage.init(named: str)
+        dd.addSubview(def)
+        
+        return dd
+    }()
+    
+    
  
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,14 +62,20 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
     }
     
     override func viewDidLoad() {
+    
+        
+        
+        
         super.viewDidLoad()
         dataSource = IndexModel.init()
         readInfo()
         request()
-        self.setMineUI()
         self.setUI()
         self.setTV()
+        self.setMineUI()
 
+        
+        //self.tableview.addSubview(locaLabel)
        
         getLocation()
        // UIScreen.main.brightness = 1
@@ -76,10 +110,14 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
             self.characterInfo["userNum"]! = ss
             self.characterInfo["isLogin"] = "1"
         }else{
-            self.characterInfo["userLabel"]! = "登录"
+            self.Mview.NumLabel.text = "  点击头像登录"
+            Mview.NumLabel.sizeToFit()
+            self.Mview.MineImage.isUserInteractionEnabled = true
             self.Mview.topBackview.isUserInteractionEnabled = true
+
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(touchLogin))
             Mview.topBackview.addGestureRecognizer(tap)
+            Mview.MineImage.addGestureRecognizer(tap)
             //self.isLogin = false;
             
         }
@@ -145,6 +183,8 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
         let currLocation = locations.last!
         print(currLocation.coordinate.latitude)
         print(currLocation.coordinate.longitude)
+       // self.locaLabel.text = String(currLocation.coordinate.latitude) + "  " +  String(currLocation.coordinate.longitude)
+        
     
     }
     
@@ -166,10 +206,31 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
     
         func request(){
             
-            let url = rootURL + "/shikeya/api/lesson_search"
-                let id = characterInfo["userNum"]!
+            let url:String = {
+                if self.characterInfo["character"] == "stu"{
+                   return  rootURL + "/shikeya/api/lesson_search"
+                }else{
+                    return  rootURL + "/shikeya/api/teacher_lesson"
+                }
+            }()
+            
+            let id:String = {
+                if self.characterInfo["character"] == "stu"{
+                    return   self.characterInfo["userNum"]!
+                }else if  self.characterInfo["character"] == "tea"{
+                    return   UserDefaults.standard.string(forKey: "teacher_name")!
+                }
                 
-                let paramete = ["student_id":"\(id)"]
+               return ""
+            }()
+                
+            let paramete:[String:String] = {
+                if self.characterInfo["character"] == "stu"{
+                    return   ["student_id":"\(id)"]
+                }else{
+                    return   ["teacher_name":"\(id)"]
+                }
+            }()// = ["student_id":"\(id)"]
                 // print(paramete,url)
                 
                 Alamofire.request(url, method: .post,parameters:paramete).responseJSON(completionHandler: {
@@ -181,8 +242,13 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
                     }else{
                         SVProgressHUD.showError(withStatus: "网络连接失败")
                     }
+                    
                     var new =  self.dataSource.dataSource
-
+                    for (key,_) in new{
+                        new[key]?.removeAll()
+                    }
+                    
+                
                     if let js = response.result.value{
                         let json = JSON(js)
                         print(json)
@@ -202,6 +268,15 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
                                 if let ss = result[i]["lesson_name"].string{
                                     new["name"]?.append(ss);
                                 }
+                                if let ss = result[i]["exist"].string{
+                                    new["status"]?.append(ss);
+                                }else
+                                {
+                                    new["status"]?.append("0");
+
+                                }
+                                
+                                
                                 if let ss = result[i]["start_time"].int{
                                     let t1 = self.timeFormat(ss)
                                     let t2 = self.timeFormat(result[i]["end_time"].int!)
@@ -211,12 +286,10 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
                               }
                                 
                             }else{
-                                //如果没有课，添加默认数据；
-                                new["id"]?.append("")
-                                new["name"]?.append("今日暂无课程！");
-                                new["time"]?.append(" ");
-                                new["position"]?.append(" ");
-                                self.characterInfo["isEmpty"] = "1"
+                                
+                                
+                                self.tableview.addSubview(self.defaultView)
+                           
                                 
                                 
                                 
@@ -247,80 +320,6 @@ class IndexViewController: UIViewController,CLLocationManagerDelegate{
 
 
 
-// MARK: -  tableview
-extension IndexViewController:UITableViewDelegate,UITableViewDataSource{
-
-    
-    func setTV(){
-        self.tableview.frame = FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
-        self.tableview.dataSource = self
-        self.tableview.delegate = self
-        self.view.addSubview(tableview)
-        tableview.backgroundColor = backColor
-        let TapRecognizer = UISwipeGestureRecognizer.init(target: self, action: #selector(touchMine))
-       TapRecognizer.direction = .right
-        tableview.isUserInteractionEnabled = true
-        tableview.addGestureRecognizer(TapRecognizer)
-        
-        //let cellnib = UINib(nibName:"IndexTableViewCell",bundle:nil)
-        //tableview.register(cellnib, forCellReuseIdentifier: "index")
-        
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.dataSource["id"]!.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell : IndexTableViewCell = self.tableview.dequeueReusableCell(withIdentifier: "index") as! IndexTableViewCell
-        
-        let cell = IndexTableViewCell(style:.default,reuseIdentifier:"cell")
-        cell.selectionStyle = .none
-        cell.ClassName.text = self.dataSource.dataSource["name"]?[indexPath.row]
-        cell.time.text = self.dataSource.dataSource["time"]?[indexPath.row]
-        cell.location.text = self.dataSource.dataSource["position"]?[indexPath.row]
-        if self.characterInfo["isEmpty"] == "1"{
-            cell.SignButton.isHidden = true
-        }
-        else  if self.characterInfo["character"]! == "tea"{
-            cell.SignButton.setTitle("获取\n签到码", for: .normal)
-        }else{
-            cell.SignButton.setTitle("立即\n签到", for: .normal)
-            
-        }
-        cell.fileButton.tag = indexPath.row
-        cell.fileLabel.text = (self.dataSource.dataSource["name"]?[indexPath.row])! + "  课件"
-        cell.fileLabel.sizeToFit()
-        cell.SignButton.tag = indexPath.row
-        cell.ClassName.sizeToFit()
-        cell.time.sizeToFit()
-        cell.location.sizeToFit()
-        cell.SignButton.addTarget(self, action: #selector(didTouchSign(btn:)), for: .touchUpInside)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return getHeight(263)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return getHeight(20)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let line = UIView()
-        line.frame = CGRect(x:0,y:getHeight(0),width:SCREEN_WIDTH,height:getHeight(20))
-        line.backgroundColor = backColor
-        
-        
-        return line
-    }
-    
-    
-}
 
 
 

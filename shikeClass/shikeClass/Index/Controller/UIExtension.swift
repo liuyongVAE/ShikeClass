@@ -19,7 +19,7 @@ extension IndexViewController{
             [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = naviColor
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         // 添加个人中心按钮
         let item = UIBarButtonItem(image:#imageLiteral(resourceName: "bottom_icon5"),style:.plain,target:self,action:#selector(touchMine))
         item.tintColor = UIColor.white
@@ -38,11 +38,16 @@ extension IndexViewController{
         self.viewReturn.addSubview(Mview.topBackview)
         self.viewReturn.addSubview(Mview.bottomView)
         print(characterInfo)
-        Mview.NameLabel.text = self.characterInfo["userLabel"];
-        Mview.NameLabel.sizeToFit()
         if characterInfo["character"] == "stu"{
+            Mview.NameLabel.text = self.characterInfo["userLabel"]
+            Mview.NameLabel.sizeToFit()
+
             Mview.NumLabel.text = self.characterInfo["userNum"];
             Mview.NumLabel.sizeToFit()
+        }else{
+            let usd = UserDefaults.standard
+            Mview.NameLabel.text = usd.string(forKey: "teacher_name");
+            Mview.NameLabel.sizeToFit()
         }
         
     }
@@ -115,6 +120,7 @@ extension IndexViewController{
         viewLeft.frame = CGRect(x:-SCREEN_WIDTH,y:0,width:SCREEN_WIDTH,height:SCREEN_HEIGHT)
         viewLeft.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         
+       // self.view.addSubview(viewLeft)
         UIApplication.shared.windows.last?.addSubview(viewLeft)
         viewLeft.isUserInteractionEnabled = true
         
@@ -159,6 +165,12 @@ extension IndexViewController{
             self.navigationController?.pushViewController(MyFileTableViewController(), animated: true)
         case 2:
             print("mySign")
+            if characterInfo["character"] == "tea"{
+                self.navigationController?.pushViewController(MySIgnViewController(), animated: true)
+            }else{
+                self.navigationController?.pushViewController(MySIgnViewController(), animated: true)
+            }
+            
         case 3:
             print("setting")
             self.navigationController?.pushViewController(SettingViewController(), animated: true)

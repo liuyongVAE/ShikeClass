@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "个人.png",
+      "filename" : "D17744B7A3794A2C2926E5900CC433F1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "个人 (1).png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "个人 (2).png",
       "scale" : "3x"
     }
   ],
